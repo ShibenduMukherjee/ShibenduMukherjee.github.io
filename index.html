@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-
-<html class="dark" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Lead Data Scientist &amp; ML Consultant | Professional Portfolio</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Shibendu Mukherjee - Lead Data Scientist & ML Consultant</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script>
         tailwind.config = {
             darkMode: "class",
             theme: {
@@ -33,7 +32,7 @@
             },
         }
     </script>
-<style>
+    <style>
         body {
             font-family: 'Inter', sans-serif;
             scroll-behavior: smooth;
@@ -51,322 +50,527 @@
             backdrop-filter: blur(12px);
             border: 1px solid rgba(40, 44, 57, 0.8);
         }
+        /* Tab transitions */
+        .tab-content {
+            transition: opacity 0.3s ease-in-out;
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 <body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 selection:bg-primary selection:text-white">
 <!-- Grid Background Overlay -->
 <div class="fixed inset-0 bg-grid-pattern pointer-events-none z-0"></div>
 <div class="relative z-10 flex flex-col min-h-screen">
-<!-- Top Navigation -->
-<header class="sticky top-0 z-50 w-full border-b border-border-dark bg-background-dark/80 backdrop-blur-md">
-<div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-<div class="flex items-center gap-3">
-<div class="bg-primary p-1.5 rounded-lg">
-<span class="material-symbols-outlined text-white text-xl">insights</span>
-</div>
-<span class="text-lg font-bold tracking-tight text-white">DS/ML <span class="text-primary">Expert</span></span>
-</div>
-<nav class="hidden md:flex items-center gap-8">
-<a class="text-sm font-medium hover:text-primary transition-colors text-slate-300" href="#summary">Summary</a>
-<a class="text-sm font-medium hover:text-primary transition-colors text-slate-300" href="#experience">Experience</a>
-<a class="text-sm font-medium hover:text-primary transition-colors text-slate-300" href="#skills">Skills</a>
-<a class="text-sm font-medium hover:text-primary transition-colors text-slate-300" href="#education">Education</a>
-<button class="bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-lg text-sm font-bold transition-all transform hover:scale-105">
-                        Contact Me
-                    </button>
-</nav>
-</div>
-</header>
-<main class="flex-grow">
-<!-- Hero Section -->
-<section class="relative pt-20 pb-16 px-6 overflow-hidden">
-<div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
-<div class="space-y-8">
-<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-wider">
-<span class="relative flex h-2 w-2">
-<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-<span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-</span>
+    <!-- Top Navigation -->
+    <header class="sticky top-0 z-50 w-full border-b border-border-dark bg-background-dark/80 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="bg-primary p-1.5 rounded-lg">
+                    <span class="material-symbols-outlined text-white text-xl">insights</span>
+                </div>
+                <span class="text-lg font-bold tracking-tight text-white">Shibendu <span class="text-primary">Mukherjee</span></span>
+            </div>
+            <nav class="hidden md:flex items-center gap-8">
+                <button onclick="switchTab('resume')" id="nav-resume" class="text-sm font-medium text-primary transition-colors hover:text-primary/80">Resume</button>
+                <button onclick="switchTab('projects')" id="nav-projects" class="text-sm font-medium text-slate-300 hover:text-primary transition-colors">Projects</button>
+                <button onclick="scrollToContact()" class="bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-lg text-sm font-bold transition-all transform hover:scale-105">
+                    Contact Me
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <!-- Resume Tab -->
+        <div id="resume-tab" class="tab-content">
+            <!-- Hero Section -->
+            <section class="relative pt-20 pb-16 px-6 overflow-hidden">
+                <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-8">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-wider">
+                            <span class="relative flex h-2 w-2">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                            </span>
                             Available for Consulting
                         </div>
-<h1 class="text-5xl lg:text-7xl font-black tracking-tighter leading-[1.1] text-white">
-                            Lead Data Scientist &amp; <span class="text-primary">ML Consultant</span>
-</h1>
-<p class="text-lg text-slate-400 max-w-xl leading-relaxed">
+                        <h1 class="text-5xl lg:text-7xl font-black tracking-tighter leading-[1.1] text-white">
+                            Lead Data Scientist & <span class="text-primary">ML Consultant</span>
+                        </h1>
+                        <p class="text-lg text-slate-400 max-w-xl leading-relaxed">
                             Transforming complex datasets into strategic assets through advanced engineering, NLP, and predictive modeling. 10+ years of high-impact delivery.
                         </p>
-<div class="flex flex-wrap gap-4">
-<button class="bg-primary text-white px-8 py-4 rounded-xl font-bold flex items-center gap-2 hover:shadow-[0_0_20px_rgba(13,70,242,0.4)] transition-all">
-                                View Portfolio <span class="material-symbols-outlined text-sm">arrow_forward</span>
-</button>
-<button class="glass-card text-white px-8 py-4 rounded-xl font-bold hover:bg-white/5 transition-all">
+                        <div class="flex flex-wrap gap-4">
+                            <button onclick="switchTab('projects')" class="bg-primary text-white px-8 py-4 rounded-xl font-bold flex items-center gap-2 hover:shadow-[0_0_20px_rgba(13,70,242,0.4)] transition-all">
+                                View Projects <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                            </button>
+                            <button class="glass-card text-white px-8 py-4 rounded-xl font-bold hover:bg-white/5 transition-all">
                                 Download CV
                             </button>
-</div>
-</div>
-<div class="relative lg:block hidden">
-<div class="relative z-10 glass-card p-2 rounded-2xl overflow-hidden shadow-2xl">
-<img alt="Data Visualization Dashboard" class="rounded-xl opacity-80" data-alt="Abstract dark data visualization dashboard with graphs" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKhBnPULfzIKdBl2QdIbBFLXbylRHe2ujyG1AXr3XA7kTAkeWTTuurrvr3ytUe2fHIzePAvXa0rGeIWALPssROhNKrNGsSsF0H-DlxY_VWjf3NjL63qtSXe_QhZux7hqx4QZz2QhjCJXeBPJPsu7zNGlvLVIW0ScCSRPcgg_Aj2E2HlVPN2HjF42bZTgNQ08aCUpGG2OAr5NNj0rSHbnsKF75T2rM5RqWxAYXZP9-fr7bJE0rOjDzJdYXhAWoRBqd0ClXLA-2-IDk"/>
-</div>
-<div class="absolute -top-10 -right-10 w-64 h-64 bg-primary/20 rounded-full blur-[100px] -z-10"></div>
-<div class="absolute -bottom-10 -left-10 w-64 h-64 bg-primary/10 rounded-full blur-[100px] -z-10"></div>
-</div>
-</div>
-</section>
-<!-- Stats Bar -->
-<section class="px-6 py-12">
-<div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">
-<div class="glass-card p-8 rounded-2xl border-l-4 border-primary">
-<span class="block text-4xl font-black text-white mb-1">10+</span>
-<span class="text-sm font-medium text-slate-400 uppercase tracking-widest">Years Experience</span>
-</div>
-<div class="glass-card p-8 rounded-2xl border-l-4 border-primary">
-<span class="block text-4xl font-black text-white mb-1">50+</span>
-<span class="text-sm font-medium text-slate-400 uppercase tracking-widest">ML Models</span>
-</div>
-<div class="glass-card p-8 rounded-2xl border-l-4 border-primary">
-<span class="block text-4xl font-black text-white mb-1">4</span>
-<span class="text-sm font-medium text-slate-400 uppercase tracking-widest">Major Roles</span>
-</div>
-<div class="glass-card p-8 rounded-2xl border-l-4 border-primary">
-<span class="block text-2xl font-black text-white mb-1 leading-tight">MHRD</span>
-<span class="text-sm font-medium text-slate-400 uppercase tracking-widest">Scholar</span>
-</div>
-</div>
-</section>
-<!-- Summary Section -->
-<section class="px-6 py-20 bg-primary/[0.02]" id="summary">
-<div class="max-w-4xl mx-auto text-center">
-<h2 class="text-3xl font-bold mb-8 text-white">Professional Summary</h2>
-<p class="text-xl leading-relaxed text-slate-300">
-                        A seasoned data professional with a proven track record in developing cross-domain solutions. Specializing in bridging the gap between raw data and business intelligence through <span class="text-primary font-semibold">Feature Engineering</span>, <span class="text-primary font-semibold">NLP optimization</span>, and <span class="text-primary font-semibold">Human-in-the-loop automation</span>. Focused on creating scalable, high-accuracy predictive systems that drive measurable ROI.
+                        </div>
+                    </div>
+                    <div class="relative lg:block hidden">
+                        <div class="relative z-10 glass-card p-2 rounded-2xl overflow-hidden shadow-2xl">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKhBnPULfzIKdBl2QdIbBFLXbylRHe2ujyG1AXr3XA7kTAkeWTTuurrvr3ytUe2fHIzePAvXa0rGeIWALPssROhNKrNGsSsF0H-DlxY_VWjf3NjL63qtSXe_QhZux7hqx4QZz2QhjCJXeBPJPsu7zNGlvLVIW0ScCSRPcgg_Aj2E2HlVPN2HjF42bZTgNQ08aCUpGG2OAr5NNj0rSHbnsKF75T2rM5RqWxAYXZP9-fr7bJE0rOjDzJdYXhAWoRBqd0ClXLA-2-IDk" alt="Data Visualization Dashboard" class="rounded-xl opacity-80" data-alt="Abstract dark data visualization dashboard with graphs"/>
+                        </div>
+                        <div class="absolute -top-10 -right-10 w-64 h-64 bg-primary/20 rounded-full blur-[100px] -z-10"></div>
+                        <div class="absolute -bottom-10 -left-10 w-64 h-64 bg-primary/10 rounded-full blur-[100px] -z-10"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Stats Bar -->
+            <section class="px-6 py-12">
+                <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div class="glass-card p-8 rounded-2xl border-l-4 border-primary">
+                        <span class="block text-4xl font-black text-white mb-1">10+</span>
+                        <span class="text-sm font-medium text-slate-400 uppercase tracking-widest">Years Experience</span>
+                    </div>
+                    <div class="glass-card p-8 rounded-2xl border-l-4 border-primary">
+                        <span class="block text-4xl font-black text-white mb-1">50+</span>
+                        <span class="text-sm font-medium text-slate-400 uppercase tracking-widest">ML Models</span>
+                    </div>
+                    <div class="glass-card p-8 rounded-2xl border-l-4 border-primary">
+                        <span class="block text-4xl font-black text-white mb-1">4</span>
+                        <span class="text-sm font-medium text-slate-400 uppercase tracking-widest">Major Roles</span>
+                    </div>
+                    <div class="glass-card p-8 rounded-2xl border-l-4 border-primary">
+                        <span class="block text-2xl font-black text-white mb-1 leading-tight">MHRD</span>
+                        <span class="text-sm font-medium text-slate-400 uppercase tracking-widest">Scholar</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Summary Section -->
+            <section id="summary" class="px-6 py-20 bg-primary/[0.02]">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h2 class="text-3xl font-bold mb-8 text-white">Professional Summary</h2>
+                    <p class="text-xl leading-relaxed text-slate-300">
+                        10+ years of experience working across Analytics & Machine Learning domain. Proficient in machine learning and data mining techniques like Feature Engineering, Classification, Regression, Clustering, and NLP. I understand and translate statistics and analytics to address business problems, structure solutions to meet client needs, and have hands-on experience in Python, SQL, R, SAS Enterprise Miner, Weka, and Excel.
                     </p>
-</div>
-</section>
-<!-- Experience Section -->
-<section class="px-6 py-24" id="experience">
-<div class="max-w-5xl mx-auto">
-<div class="flex items-center gap-4 mb-16">
-<h2 class="text-4xl font-black text-white">Work Experience</h2>
-<div class="h-px flex-grow bg-border-dark"></div>
-</div>
-<div class="relative space-y-12">
-<!-- Timeline Line -->
-<div class="absolute left-0 md:left-1/2 top-0 bottom-0 w-0.5 timeline-gradient -translate-x-1/2 hidden md:block"></div>
-<!-- Item 1 -->
-<div class="relative flex flex-col md:flex-row items-center justify-between w-full">
-<div class="md:w-[45%] mb-8 md:mb-0">
-<div class="glass-card p-6 rounded-2xl hover:border-primary/50 transition-all group">
-<div class="flex items-center justify-between mb-4">
-<span class="px-3 py-1 bg-primary/20 text-primary text-xs font-bold rounded">Present</span>
-<span class="material-symbols-outlined text-primary group-hover:rotate-12 transition-transform">cloud_done</span>
-</div>
-<h3 class="text-xl font-bold text-white mb-1">Consultant</h3>
-<p class="text-primary font-semibold mb-4">LatentView Analytics</p>
-<ul class="text-slate-400 text-sm space-y-2">
-<li>• Led cross-domain solutions for global enterprises.</li>
-<li>• Developed 'Next Best Action' models for major credit card providers.</li>
-<li>• Architected robust Azure Data Engineering pipelines.</li>
-</ul>
-</div>
-</div>
-<div class="absolute left-0 md:left-1/2 w-4 h-4 bg-primary rounded-full -translate-x-1/2 shadow-[0_0_15px_rgba(13,70,242,0.8)] z-20"></div>
-<div class="md:w-[45%] pl-8 md:pl-0">
-<span class="text-slate-500 font-bold uppercase tracking-widest text-xs">LatentView Analytics</span>
-</div>
-</div>
-<!-- Item 2 -->
-<div class="relative flex flex-col md:flex-row-reverse items-center justify-between w-full">
-<div class="md:w-[45%] mb-8 md:mb-0">
-<div class="glass-card p-6 rounded-2xl hover:border-primary/50 transition-all group">
-<div class="flex items-center justify-between mb-4">
-<span class="px-3 py-1 bg-primary/20 text-primary text-xs font-bold rounded">2018 - 2021</span>
-<span class="material-symbols-outlined text-primary group-hover:rotate-12 transition-transform">psychology</span>
-</div>
-<h3 class="text-xl font-bold text-white mb-1">Associate Consultant</h3>
-<p class="text-primary font-semibold mb-4">Wipro</p>
-<ul class="text-slate-400 text-sm space-y-2">
-<li>• Specialized in ML product design and NLP optimization.</li>
-<li>• Implemented human-in-the-loop automation for complex workflows.</li>
-<li>• Optimized model performance for real-time inference.</li>
-</ul>
-</div>
-</div>
-<div class="absolute left-0 md:left-1/2 w-4 h-4 bg-primary rounded-full -translate-x-1/2 shadow-[0_0_15px_rgba(13,70,242,0.8)] z-20"></div>
-<div class="md:w-[45%] pr-8 md:pr-0 text-left md:text-right">
-<span class="text-slate-500 font-bold uppercase tracking-widest text-xs">Wipro Technologies</span>
-</div>
-</div>
-<!-- Item 3 -->
-<div class="relative flex flex-col md:flex-row items-center justify-between w-full">
-<div class="md:w-[45%] mb-8 md:mb-0">
-<div class="glass-card p-6 rounded-2xl hover:border-primary/50 transition-all group">
-<div class="flex items-center justify-between mb-4">
-<span class="px-3 py-1 bg-primary/20 text-primary text-xs font-bold rounded">2015 - 2018</span>
-<span class="material-symbols-outlined text-primary group-hover:rotate-12 transition-transform">shopping_cart</span>
-</div>
-<h3 class="text-xl font-bold text-white mb-1">Senior Business Analyst</h3>
-<p class="text-primary font-semibold mb-4">Tredence</p>
-<ul class="text-slate-400 text-sm space-y-2">
-<li>• Retail analytics and campaign sensitivity analysis.</li>
-<li>• Advanced forecasting using Arima and BSTS models.</li>
-<li>• Developed demand forecasting tools for global retailers.</li>
-</ul>
-</div>
-</div>
-<div class="absolute left-0 md:left-1/2 w-4 h-4 bg-primary rounded-full -translate-x-1/2 shadow-[0_0_15px_rgba(13,70,242,0.8)] z-20"></div>
-<div class="md:w-[45%] pl-8 md:pl-0">
-<span class="text-slate-500 font-bold uppercase tracking-widest text-xs">Tredence Inc.</span>
-</div>
-</div>
-<!-- Item 4 -->
-<div class="relative flex flex-col md:flex-row-reverse items-center justify-between w-full">
-<div class="md:w-[45%] mb-8 md:mb-0">
-<div class="glass-card p-6 rounded-2xl hover:border-primary/50 transition-all group">
-<div class="flex items-center justify-between mb-4">
-<span class="px-3 py-1 bg-primary/20 text-primary text-xs font-bold rounded">Early Career</span>
-<span class="material-symbols-outlined text-primary group-hover:rotate-12 transition-transform">cell_tower</span>
-</div>
-<h3 class="text-xl font-bold text-white mb-1">Data Analyst</h3>
-<p class="text-primary font-semibold mb-4">ABIBA Systems</p>
-<ul class="text-slate-400 text-sm space-y-2">
-<li>• Built telecom analytics and recommendation systems.</li>
-<li>• Applied Social Network Analysis (SNA) for churn prediction.</li>
-</ul>
-</div>
-</div>
-<div class="absolute left-0 md:left-1/2 w-4 h-4 bg-primary rounded-full -translate-x-1/2 shadow-[0_0_15px_rgba(13,70,242,0.8)] z-20"></div>
-<div class="md:w-[45%] pr-8 md:pr-0 text-left md:text-right">
-<span class="text-slate-500 font-bold uppercase tracking-widest text-xs">ABIBA Systems</span>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Skills Grid -->
-<section class="px-6 py-24 bg-surface-dark/30" id="skills">
-<div class="max-w-7xl mx-auto">
-<div class="text-center mb-16">
-<h2 class="text-4xl font-black text-white mb-4">Technical Arsenal</h2>
-<p class="text-slate-400">Core competencies in modern data science and engineering stacks.</p>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-<!-- Langs -->
-<div class="glass-card p-8 rounded-2xl border-t-2 border-primary">
-<div class="flex items-center gap-3 mb-6">
-<span class="material-symbols-outlined text-primary">terminal</span>
-<h4 class="font-bold text-white">Languages</h4>
-</div>
-<div class="flex flex-wrap gap-2">
-<span class="bg-white/5 px-3 py-1 rounded-full text-xs font-medium text-slate-300">Python</span>
-<span class="bg-white/5 px-3 py-1 rounded-full text-xs font-medium text-slate-300">R</span>
-<span class="bg-white/5 px-3 py-1 rounded-full text-xs font-medium text-slate-300">SQL</span>
-<span class="bg-white/5 px-3 py-1 rounded-full text-xs font-medium text-slate-300">SAS</span>
-</div>
-</div>
-<!-- Cloud -->
-<div class="glass-card p-8 rounded-2xl border-t-2 border-primary">
-<div class="flex items-center gap-3 mb-6">
-<span class="material-symbols-outlined text-primary">cloud</span>
-<h4 class="font-bold text-white">Cloud &amp; Engineering</h4>
-</div>
-<div class="flex flex-wrap gap-2">
-<span class="bg-white/5 px-3 py-1 rounded-full text-xs font-medium text-slate-300">Azure Data Factory</span>
-<span class="bg-white/5 px-3 py-1 rounded-full text-xs font-medium text-slate-300">Databricks</span>
-</div>
-</div>
-<!-- Big Data -->
-<div class="glass-card p-8 rounded-2xl border-t-2 border-primary">
-<div class="flex items-center gap-3 mb-6">
-<span class="material-symbols-outlined text-primary">database</span>
-<h4 class="font-bold text-white">Big Data</h4>
-</div>
-<div class="flex flex-wrap gap-2">
-<span class="bg-white/5 px-3 py-1 rounded-full text-xs font-medium text-slate-300">Hive</span>
-<span class="bg-white/5 px-3 py-1 rounded-full text-xs font-medium text-slate-300">Teradata</span>
-<span class="bg-white/5 px-3 py-1 rounded-full text-xs font-medium text-slate-300">Hadoop</span>
-</div>
-</div>
-<!-- Specialization -->
-<div class="glass-card p-8 rounded-2xl border-t-2 border-primary">
-<div class="flex items-center gap-3 mb-6">
-<span class="material-symbols-outlined text-primary">hub</span>
-<h4 class="font-bold text-white">Specializations</h4>
-</div>
-<div class="flex flex-wrap gap-2">
-<span class="bg-white/5 px-3 py-1 rounded-full text-xs font-medium text-slate-300">NLP</span>
-<span class="bg-white/5 px-3 py-1 rounded-full text-xs font-medium text-slate-300">Time Series</span>
-<span class="bg-white/5 px-3 py-1 rounded-full text-xs font-medium text-slate-300">Genetic Algorithms</span>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Education & Publication -->
-<section class="px-6 py-24" id="education">
-<div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12">
-<!-- Education -->
-<div>
-<div class="flex items-center gap-4 mb-10">
-<h2 class="text-3xl font-bold text-white">Education</h2>
-<div class="h-px flex-grow bg-border-dark"></div>
-</div>
-<div class="glass-card p-8 rounded-2xl relative overflow-hidden group">
-<div class="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
-<span class="material-symbols-outlined text-8xl text-primary">school</span>
-</div>
-<h3 class="text-2xl font-bold text-white mb-2">Master of Engineering</h3>
-<p class="text-primary font-medium mb-4">UVCE, Bangalore University</p>
-<div class="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-lg text-primary text-sm font-bold uppercase tracking-wide">
-<span class="material-symbols-outlined text-sm">military_tech</span>
-                                MHRD Scholar
+                </div>
+            </section>
+
+            <!-- Experience Section -->
+            <section id="experience" class="px-6 py-24">
+                <div class="max-w-5xl mx-auto">
+                    <div class="flex items-center gap-4 mb-16">
+                        <h2 class="text-4xl font-black text-white">Work Experience</h2>
+                        <div class="h-px flex-grow bg-border-dark"></div>
+                    </div>
+                    <div class="relative space-y-12">
+                        <!-- Timeline Line -->
+                        <div class="absolute left-0 md:left-1/2 top-0 bottom-0 w-0.5 timeline-gradient -translate-x-1/2 hidden md:block"></div>
+
+                        <!-- Item 1: Latent View -->
+                        <div class="relative flex flex-col md:flex-row items-center justify-between w-full">
+                            <div class="md:w-[45%] mb-8 md:mb-0">
+                                <div class="glass-card p-6 rounded-2xl hover:border-primary/50 transition-all group">
+                                    <div class="flex items-center justify-between mb-4">
+                                        <span class="px-3 py-1 bg-primary/20 text-primary text-xs font-bold rounded">Dec 2022 - Present</span>
+                                        <span class="material-symbols-outlined text-primary group-hover:rotate-12 transition-transform">cloud_done</span>
+                                    </div>
+                                    <h3 class="text-xl font-bold text-white mb-1">Consultant</h3>
+                                    <p class="text-primary font-semibold mb-4">LatentView Analytics</p>
+                                    <ul class="text-slate-400 text-sm space-y-2">
+                                        <li>• Led cross-domain problem understanding across 8 business areas.</li>
+                                        <li>• Delivered 'Next Best Action' models for credit cards.</li>
+                                        <li>• Built DE pipelines in Azure Data Factory and Databricks.</li>
+                                        <li>• Automated merchant reporting by modernizing legacy SAS workflows.</li>
+                                    </ul>
+                                </div>
                             </div>
-<p class="mt-6 text-slate-400 text-sm italic">Awarded scholarship for excellence by Ministry of Human Resource Development.</p>
-</div>
-</div>
-<!-- Publication -->
-<div>
-<div class="flex items-center gap-4 mb-10">
-<h2 class="text-3xl font-bold text-white">Publication</h2>
-<div class="h-px flex-grow bg-border-dark"></div>
-</div>
-<div class="glass-card p-8 rounded-2xl border-l-4 border-primary hover:translate-x-2 transition-all">
-<span class="text-primary font-bold text-xs uppercase tracking-[0.2em] mb-4 block">Published Research</span>
-<h3 class="text-xl font-bold text-white leading-tight mb-4 group-hover:text-primary transition-colors">
+                            <div class="absolute left-0 md:left-1/2 w-4 h-4 bg-primary rounded-full -translate-x-1/2 shadow-[0_0_15px_rgba(13,70,242,0.8)] z-20"></div>
+                            <div class="md:w-[45%] pl-8 md:pl-0">
+                                <span class="text-slate-500 font-bold uppercase tracking-widest text-xs">LatentView Analytics</span>
+                            </div>
+                        </div>
+
+                        <!-- Item 2: Wipro -->
+                        <div class="relative flex flex-col md:flex-row-reverse items-center justify-between w-full">
+                            <div class="md:w-[45%] mb-8 md:mb-0">
+                                <div class="glass-card p-6 rounded-2xl hover:border-primary/50 transition-all group">
+                                    <div class="flex items-center justify-between mb-4">
+                                        <span class="px-3 py-1 bg-primary/20 text-primary text-xs font-bold rounded">Jun 2019 - Dec 2022</span>
+                                        <span class="material-symbols-outlined text-primary group-hover:rotate-12 transition-transform">psychology</span>
+                                    </div>
+                                    <h3 class="text-xl font-bold text-white mb-1">Associate Consultant</h3>
+                                    <p class="text-primary font-semibold mb-4">Wipro Limited</p>
+                                    <ul class="text-slate-400 text-sm space-y-2">
+                                        <li>• Product designing and implementation for fast prototyping of ML use cases.</li>
+                                        <li>• NLP optimization for service ticket resolution.</li>
+                                        <li>• Created ML-based app for 'human in the loop' activities.</li>
+                                        <li>• Adaptive Remedial solution for CMDB configuration items.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="absolute left-0 md:left-1/2 w-4 h-4 bg-primary rounded-full -translate-x-1/2 shadow-[0_0_15px_rgba(13,70,242,0.8)] z-20"></div>
+                            <div class="md:w-[45%] pr-8 md:pr-0 text-left md:text-right">
+                                <span class="text-slate-500 font-bold uppercase tracking-widest text-xs">Wipro Technologies</span>
+                            </div>
+                        </div>
+
+                        <!-- Item 3: Tredence -->
+                        <div class="relative flex flex-col md:flex-row items-center justify-between w-full">
+                            <div class="md:w-[45%] mb-8 md:mb-0">
+                                <div class="glass-card p-6 rounded-2xl hover:border-primary/50 transition-all group">
+                                    <div class="flex items-center justify-between mb-4">
+                                        <span class="px-3 py-1 bg-primary/20 text-primary text-xs font-bold rounded">Dec 2017 - Jun 2019</span>
+                                        <span class="material-symbols-outlined text-primary group-hover:rotate-12 transition-transform">shopping_cart</span>
+                                    </div>
+                                    <h3 class="text-xl font-bold text-white mb-1">Senior Business Analyst</h3>
+                                    <p class="text-primary font-semibold mb-4">Tredence Analytics</p>
+                                    <ul class="text-slate-400 text-sm space-y-2">
+                                        <li>• Supported acquisition and retention decisions for a leading US retailer.</li>
+                                        <li>• Campaign sensitivity analysis and merchandising insights.</li>
+                                        <li>• Forecasting at store level using Arima, Arimax, and BSTS.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="absolute left-0 md:left-1/2 w-4 h-4 bg-primary rounded-full -translate-x-1/2 shadow-[0_0_15px_rgba(13,70,242,0.8)] z-20"></div>
+                            <div class="md:w-[45%] pl-8 md:pl-0">
+                                <span class="text-slate-500 font-bold uppercase tracking-widest text-xs">Tredence Inc.</span>
+                            </div>
+                        </div>
+
+                        <!-- Item 4: ABIBA -->
+                        <div class="relative flex flex-col md:flex-row-reverse items-center justify-between w-full">
+                            <div class="md:w-[45%] mb-8 md:mb-0">
+                                <div class="glass-card p-6 rounded-2xl hover:border-primary/50 transition-all group">
+                                    <div class="flex items-center justify-between mb-4">
+                                        <span class="px-3 py-1 bg-primary/20 text-primary text-xs font-bold rounded">Aug 2015 - Dec 2017</span>
+                                        <span class="material-symbols-outlined text-primary group-hover:rotate-12 transition-transform">cell_tower</span>
+                                    </div>
+                                    <h3 class="text-xl font-bold text-white mb-1">Data Analyst</h3>
+                                    <p class="text-primary font-semibold mb-4">ABIBA Systems</p>
+                                    <ul class="text-slate-400 text-sm space-y-2">
+                                        <li>• Built ML-driven telecom solutions covering customer segmentation.</li>
+                                        <li>• SNA-based influencer detection and cross-sell/up-sell models.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="absolute left-0 md:left-1/2 w-4 h-4 bg-primary rounded-full -translate-x-1/2 shadow-[0_0_15px_rgba(13,70,242,0.8)] z-20"></div>
+                            <div class="md:w-[45%] pr-8 md:pr-0 text-left md:text-right">
+                                <span class="text-slate-500 font-bold uppercase tracking-widest text-xs">ABIBA Systems</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Skills Grid -->
+            <section id="skills" class="px-6 py-24 bg-surface-dark/30">
+                <div class="max-w-7xl mx-auto">
+                    <div class="text-center mb-16">
+                        <h2 class="text-4xl font-black text-white mb-4">Technical Arsenal</h2>
+                        <p class="text-slate-400">Core competencies in modern data science and engineering stacks.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <!-- Langs -->
+                        <div class="glass-card p-8 rounded-2xl border-t-2 border-primary">
+                            <div class="flex items-center gap-3 mb-6">
+                                <span class="material-symbols-outlined text-primary">terminal</span>
+                                <h4 class="font-bold text-white">Languages & Tools</h4>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-white/5 px-3 py-1 rounded-full text-xs font-medium text-slate-300">Python</span>
+                                <span class="bg-white/5 px-3 py-1 rounded-full text-xs font-medium text-slate-300">R</span>
+                                <span class="bg-white/5 px-3 py-1 rounded-full text-xs font-medium text-slate-300">SQL</span>
+                                <span class="bg-white/5 px-3 py-1 rounded-full text-xs font-medium text-slate-300">SAS EM</span>
+                                <span class="bg-white/5 px-3 py-1 rounded-full text-xs font-medium text-slate-300">Weka</span>
+                                <span class="bg-white/5 px-3 py-1 rounded-full text-xs font-medium text-slate-300">Excel</span>
+                            </div>
+                        </div>
+                        <!-- Cloud -->
+                        <div class="glass-card p-8 rounded-2xl border-t-2 border-primary">
+                            <div class="flex items-center gap-3 mb-6">
+                                <span class="material-symbols-outlined text-primary">cloud</span>
+                                <h4 class="font-bold text-white">Cloud & Engineering</h4>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-white/5 px-3 py-1 rounded-full text-xs font-medium text-slate-300">Azure Data Factory</span>
+                                <span class="bg-white/5 px-3 py-1 rounded-full text-xs font-medium text-slate-300">Databricks</span>
+                            </div>
+                        </div>
+                        <!-- Big Data -->
+                        <div class="glass-card p-8 rounded-2xl border-t-2 border-primary">
+                            <div class="flex items-center gap-3 mb-6">
+                                <span class="material-symbols-outlined text-primary">database</span>
+                                <h4 class="font-bold text-white">Databases</h4>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-white/5 px-3 py-1 rounded-full text-xs font-medium text-slate-300">Hive</span>
+                                <span class="bg-white/5 px-3 py-1 rounded-full text-xs font-medium text-slate-300">Teradata</span>
+                                <span class="bg-white/5 px-3 py-1 rounded-full text-xs font-medium text-slate-300">Oracle</span>
+                                <span class="bg-white/5 px-3 py-1 rounded-full text-xs font-medium text-slate-300">Vertica</span>
+                                <span class="bg-white/5 px-3 py-1 rounded-full text-xs font-medium text-slate-300">MySQL</span>
+                                <span class="bg-white/5 px-3 py-1 rounded-full text-xs font-medium text-slate-300">Postgres</span>
+                            </div>
+                        </div>
+                        <!-- Specialization -->
+                        <div class="glass-card p-8 rounded-2xl border-t-2 border-primary">
+                            <div class="flex items-center gap-3 mb-6">
+                                <span class="material-symbols-outlined text-primary">hub</span>
+                                <h4 class="font-bold text-white">Specializations</h4>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-white/5 px-3 py-1 rounded-full text-xs font-medium text-slate-300">NLP</span>
+                                <span class="bg-white/5 px-3 py-1 rounded-full text-xs font-medium text-slate-300">Time Series</span>
+                                <span class="bg-white/5 px-3 py-1 rounded-full text-xs font-medium text-slate-300">Genetic Algorithms</span>
+                                <span class="bg-white/5 px-3 py-1 rounded-full text-xs font-medium text-slate-300">Survival Analysis</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Education & Publication -->
+            <section id="education" class="px-6 py-24">
+                <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12">
+                    <!-- Education -->
+                    <div>
+                        <div class="flex items-center gap-4 mb-10">
+                            <h2 class="text-3xl font-bold text-white">Education</h2>
+                            <div class="h-px flex-grow bg-border-dark"></div>
+                        </div>
+                        <div class="space-y-6">
+                            <div class="glass-card p-8 rounded-2xl relative overflow-hidden group">
+                                <h3 class="text-2xl font-bold text-white mb-2">Master of Engineering</h3>
+                                <p class="text-primary font-medium mb-1">UVCE, Bangalore University</p>
+                                <p class="text-slate-400 text-sm mb-4">Computer Science (77% Aggregate)</p>
+                                <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-lg text-primary text-sm font-bold uppercase tracking-wide">
+                                    <span class="material-symbols-outlined text-sm">military_tech</span>
+                                    MHRD Scholar
+                                </div>
+                            </div>
+                             <div class="glass-card p-8 rounded-2xl relative overflow-hidden group">
+                                <h3 class="text-2xl font-bold text-white mb-2">Bachelor of Engineering</h3>
+                                <p class="text-primary font-medium mb-1">SVCE, Bangalore</p>
+                                <p class="text-slate-400 text-sm mb-4">Information Science (55% Aggregate)</p>
+                                <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-lg text-primary text-sm font-bold uppercase tracking-wide">
+                                    <span class="material-symbols-outlined text-sm">school</span>
+                                    GATE Qualified (96%ile)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Publication -->
+                    <div>
+                        <div class="flex items-center gap-4 mb-10">
+                            <h2 class="text-3xl font-bold text-white">Publication</h2>
+                            <div class="h-px flex-grow bg-border-dark"></div>
+                        </div>
+                        <div class="glass-card p-8 rounded-2xl border-l-4 border-primary hover:translate-x-2 transition-all">
+                            <span class="text-primary font-bold text-xs uppercase tracking-[0.2em] mb-4 block">Published Research</span>
+                            <h3 class="text-xl font-bold text-white leading-tight mb-4 group-hover:text-primary transition-colors">
                                 'Application of Genetic Algorithm and Machine Learning Techniques for stock market prediction'
                             </h3>
-<p class="text-slate-400 text-sm mb-6 leading-relaxed">
-                                Explored the synergy between evolutionary computing and traditional supervised learning to enhance volatility prediction in financial markets.
+                            <p class="text-slate-400 text-sm mb-6 leading-relaxed">
+                                International journal of computer Trends and technology volume 36 number 1. Explored the synergy between evolutionary computing and traditional supervised learning.
                             </p>
-<a class="inline-flex items-center gap-2 text-primary font-bold text-sm hover:underline" href="#">
-                                Read Publication <span class="material-symbols-outlined text-sm">open_in_new</span>
-</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Projects Tab -->
+        <div id="projects-tab" class="tab-content hidden px-6 py-20">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-black text-white mb-4">Case Studies & Projects</h2>
+                    <p class="text-slate-400 max-w-2xl mx-auto">Deep dive into complex problems solved through Data Science, Machine Learning, and Engineering.</p>
+                </div>
+
+                <div class="grid gap-12">
+                    <!-- Project 1 -->
+                    <div class="glass-card p-8 rounded-2xl border-t-4 border-primary">
+                        <div class="flex flex-col md:flex-row justify-between md:items-center mb-6 gap-4">
+                            <h3 class="text-2xl font-bold text-white">Next Best Action for Credit Card</h3>
+                            <span class="px-3 py-1 bg-primary/20 text-primary text-xs font-bold rounded uppercase">Latent View Analytics</span>
+                        </div>
+                        <div class="space-y-6 text-slate-300">
+                            <div>
+                                <h4 class="text-primary font-bold mb-2">Problem Statement</h4>
+                                <p>The client needed to improve customer engagement and card usage by recommending the most relevant actions or offers to credit card holders.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-primary font-bold mb-2">Solution</h4>
+                                <p>Delivered a "Next Best Action" engine combining Machine Learning models with rule-based recommendations. This hybrid approach ensured that recommendations were both personalized based on user behavior and aligned with business rules and compliance.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="glass-card p-8 rounded-2xl border-t-4 border-primary">
+                        <div class="flex flex-col md:flex-row justify-between md:items-center mb-6 gap-4">
+                            <h3 class="text-2xl font-bold text-white">Conversational Analytics & SQL Generation</h3>
+                            <span class="px-3 py-1 bg-primary/20 text-primary text-xs font-bold rounded uppercase">Latent View Analytics</span>
+                        </div>
+                        <div class="space-y-6 text-slate-300">
+                            <div>
+                                <h4 class="text-primary font-bold mb-2">Problem Statement</h4>
+                                <p>Executives needed instant insights from data without relying on technical teams to write complex SQL queries for every request.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-primary font-bold mb-2">Solution</h4>
+                                <p>Directed the development of a conversational analytics tool enabling natural-language queries. The system automated SQL generation, translating English questions into database queries to provide instant, executive-ready insights.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="glass-card p-8 rounded-2xl border-t-4 border-primary">
+                        <div class="flex flex-col md:flex-row justify-between md:items-center mb-6 gap-4">
+                            <h3 class="text-2xl font-bold text-white">NLP Optimization for Service Tickets</h3>
+                            <span class="px-3 py-1 bg-primary/20 text-primary text-xs font-bold rounded uppercase">Wipro</span>
+                        </div>
+                        <div class="space-y-6 text-slate-300">
+                            <div>
+                                <h4 class="text-primary font-bold mb-2">Problem Statement</h4>
+                                <p>Service ticket resolution was slow due to manual categorization and lack of context for support agents.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-primary font-bold mb-2">Solution</h4>
+                                <p>Used Natural Language Processing (NLP) to optimize service ticket resolution. Implemented auto-suggestion of points in comments to help executives get a complete overview of the situation and rate comments effectively.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 4 -->
+                    <div class="glass-card p-8 rounded-2xl border-t-4 border-primary">
+                        <div class="flex flex-col md:flex-row justify-between md:items-center mb-6 gap-4">
+                            <h3 class="text-2xl font-bold text-white">Human-in-the-Loop Automation App</h3>
+                            <span class="px-3 py-1 bg-primary/20 text-primary text-xs font-bold rounded uppercase">Wipro</span>
+                        </div>
+                        <div class="space-y-6 text-slate-300">
+                            <div>
+                                <h4 class="text-primary font-bold mb-2">Problem Statement</h4>
+                                <p>Fully automated workflows often failed in edge cases, while manual processes were too slow.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-primary font-bold mb-2">Solution</h4>
+                                <p>Created a Machine Learning based app to handle 'human in the loop' activities within an automation workflow. This allowed the system to handle standard cases automatically while routing complex or low-confidence cases to humans for verification, improving overall accuracy and trust.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                     <!-- Project 5 -->
+                    <div class="glass-card p-8 rounded-2xl border-t-4 border-primary">
+                        <div class="flex flex-col md:flex-row justify-between md:items-center mb-6 gap-4">
+                            <h3 class="text-2xl font-bold text-white">Retail Campaign Sensitivity & Forecasting</h3>
+                            <span class="px-3 py-1 bg-primary/20 text-primary text-xs font-bold rounded uppercase">Tredence</span>
+                        </div>
+                        <div class="space-y-6 text-slate-300">
+                            <div>
+                                <h4 class="text-primary font-bold mb-2">Problem Statement</h4>
+                                <p>A leading US retailer (80M+ customers) needed to optimize campaign effectiveness and store-level targets.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-primary font-bold mb-2">Solution</h4>
+                                <p>Conducted sensitivity analysis to measure campaign effectiveness. Implemented forecasting at both store and overall levels to set individual store targets using Arima, Arimax, and BSTS algorithms. Also helped allocate budgets based on store potential.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                     <!-- Project 6 -->
+                    <div class="glass-card p-8 rounded-2xl border-t-4 border-primary">
+                        <div class="flex flex-col md:flex-row justify-between md:items-center mb-6 gap-4">
+                            <h3 class="text-2xl font-bold text-white">Telecom Churn & Recommendation Systems</h3>
+                            <span class="px-3 py-1 bg-primary/20 text-primary text-xs font-bold rounded uppercase">ABIBA Systems</span>
+                        </div>
+                        <div class="space-y-6 text-slate-300">
+                            <div>
+                                <h4 class="text-primary font-bold mb-2">Problem Statement</h4>
+                                <p>Telecom providers faced high customer churn and needed better cross-sell opportunities.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-primary font-bold mb-2">Solution</h4>
+                                <p>Built ML-driven solutions covering customer segmentation and 2-stage recommendation systems. Utilized Social Network Analysis (SNA) for influencer detection to predict churn and drive cross-sell/up-sell strategies.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Contact Section (Footer) -->
+    <footer id="contact" class="bg-background-dark border-t border-border-dark py-12 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
+            <div>
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="bg-primary p-1.5 rounded-lg">
+                        <span class="material-symbols-outlined text-white text-xl">insights</span>
+                    </div>
+                    <span class="text-lg font-bold tracking-tight text-white">Shibendu <span class="text-primary">Mukherjee</span></span>
+                </div>
+                <p class="text-slate-500 text-sm max-w-xs mb-6">Lead Data Scientist & ML Consultant available for consulting and full-time opportunities.</p>
+                <div class="flex flex-col gap-3 text-slate-400 text-sm">
+                    <a href="mailto:email@example.com" class="flex items-center gap-2 hover:text-primary transition-colors">
+                        <span class="material-symbols-outlined text-sm">mail</span> email@example.com
+                    </a>
+                    <a href="tel:+1234567890" class="flex items-center gap-2 hover:text-primary transition-colors">
+                        <span class="material-symbols-outlined text-sm">call</span> +1234567890
+                    </a>
+                    <a href="https://linkedin.com/in/shibendu" target="_blank" class="flex items-center gap-2 hover:text-primary transition-colors">
+                        <span class="material-symbols-outlined text-sm">link</span> linkedin.com/in/shibendu
+                    </a>
+                </div>
+            </div>
+
+            <div class="flex gap-6 mt-4 md:mt-0">
+                 <!-- LinkedIn Icon -->
+                <a class="text-slate-400 hover:text-primary transition-colors" href="https://linkedin.com/in/shibendu" target="_blank">
+                    <svg class="size-6 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>
+                </a>
+            </div>
+        </div>
+    </footer>
 </div>
-</div>
-</div>
-</section>
-</main>
-<!-- Footer -->
-<footer class="bg-background-dark border-t border-border-dark py-12 px-6">
-<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-<div>
-<div class="flex items-center gap-3 mb-4">
-<div class="bg-primary p-1.5 rounded-lg">
-<span class="material-symbols-outlined text-white text-xl">insights</span>
-</div>
-<span class="text-lg font-bold tracking-tight text-white">DS/ML <span class="text-primary">Expert</span></span>
-</div>
-<p class="text-slate-500 text-sm">© 2024 Professional Portfolio. All rights reserved.</p>
-</div>
-<div class="flex gap-6">
-<a class="text-slate-400 hover:text-primary transition-colors" href="#">
-<svg class="size-6 fill-current" viewbox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>
-</a>
-<a class="text-slate-400 hover:text-primary transition-colors" href="#">
-<svg class="size-6 fill-current" viewbox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path></svg>
-</a>
-</div>
-</div>
-</footer>
-</div>
-</body></html>
+
+<script>
+    function switchTab(tabId) {
+        const resumeTab = document.getElementById('resume-tab');
+        const projectsTab = document.getElementById('projects-tab');
+        const navResume = document.getElementById('nav-resume');
+        const navProjects = document.getElementById('nav-projects');
+
+        if (tabId === 'resume') {
+            resumeTab.classList.remove('hidden');
+            projectsTab.classList.add('hidden');
+
+            navResume.classList.add('text-primary');
+            navResume.classList.remove('text-slate-300');
+
+            navProjects.classList.remove('text-primary');
+            navProjects.classList.add('text-slate-300');
+        } else {
+            resumeTab.classList.add('hidden');
+            projectsTab.classList.remove('hidden');
+
+            navProjects.classList.add('text-primary');
+            navProjects.classList.remove('text-slate-300');
+
+            navResume.classList.remove('text-primary');
+            navResume.classList.add('text-slate-300');
+        }
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function scrollToContact() {
+        document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>
