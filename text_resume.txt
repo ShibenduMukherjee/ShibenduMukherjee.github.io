@@ -1,0 +1,64 @@
+Professional Summary:
+10+ years of experience working across Analytics & Machine Learning domain and in addition 1-year project experience on Machine Learning as part of Masters
+Proficiency in machine learning and data mining techniques like Feature Engineering, Feature Selection, Classification, Regression, Clustering, Time Series Forecasting and exposure to NLP
+Understand and translate statistics and analytics to address business problems
+Structure business problems and design solutions to meet client needs
+Hands on experience in Python, SQL, R, SAS Enterprise Miner, Weka, Excel 
+Delivered Customer Segmentation & Targeting, Churn Modeling, Recommendation Systems, Social Network Analysis Models 
+Designed and built a tool for fast prototyping of ML based problems across Classification, Regression, Time Series Forecast and NLP classification
+Built ML based API for automation of human decision in automation workflow
+Optimized the infrastructure remedial process using statistical solution 
+Worked across Banking,  Retail and Telecom domain
+
+Skills & Abilities:
+
+Analytics Tool: SAS Enterprise Miner, Weka, Excel
+Programming Languages: Python, R
+Known Databases: Hive, Teradata, Oracle, Vertica, My SQL, Postgres
+Data Engineering: Azure Data Factory, Databricks
+Certifications:
+Performance Modeling and Simulations - IISC, Bangalore
+The Analytics Edge - MOOC (Edx - MITx)
+Neural Networks and Deep Learning
+Specialized Models: Time Series and Survival Analysis
+
+Experience:
+
+Latent view Analytics – Consultant (15th Dec 2022 - Present)
+Led cross-domain problem understanding across 8 business areas and delivered integrated solutions by aligning and unifying cross-functional requirements
+Delivered Next Best Action for Credit Card having combination of ML and Rule based recommendations
+Built DE pipelines in Azure Datafactory and Azure Databricks for projects 
+Automated interchange and Top-50 merchant reporting by modernizing legacy SAS workflows to SQL/Python and designing optimized Silver-layer data models
+Directed development of conversational analytics enabling natural-language queries, automated SQL generation, and instant executive-ready insights.
+Wipro Limited – Associate Consultant (27th June 2019 – 7th Dec 2022)
+Product designing and implementation for fast prototyping of ML based use cases covering Timeseries, Classification, Regression and NLP Classification
+Using Natural Language Processing optimization of the service ticket resolution
+Auto suggestion of points in a comment by executive to have a complete overview of a situation and give a rating on the comments 
+Created a ML based app to handle ‘human in the loop’ activities within an automation workflow
+Making an Adaptive Remedial solution for handling configuration item of CMDB (configuration management database), where the focus of the solution was on optimization of the remedial scripts
+Understanding the business needs with frequent client connect and understanding the data (Mapping, Quality, Sanity)
+Building MSME OD Churn model and PCFI Churn Model 
+Documentation of the projects and transition to the client
+In a span of 6 months delivering 3 newly built models and getting UAT acceptance on the same 
+Tredence Analytics Solutions PRivate Limited – Senior Business Analyst (6th Dec 2017- 26th Jun 2019)
+Client: One of the leading Retail (With a customer base of more than 80 Million in US)
+Support with the acquisition and retention decisions to meet sales goal
+Sensitivity analysis to measure the effectiveness of campaigns
+Analyze and generate insights for making merchandising decisions
+Drive app usage / conversion to Omni-channel from One Channel
+Allocating budgets and quantifying infrastructural spend according to the classification of stores based on their potential
+Forecasting at a store level and overall level to set targets for individual stores using Arima, Arimax and BSTS algorithms
+Selection of potential target market with offers to be rolled out
+Assessing the impact of all the campaigns launched for various time-period
+ABIBA Systems private ltd - DATa Analyst (3rd Aug 2015 – 5th Dec 2017)
+Built ML-driven telecom solutions covering customer segmentation, 2-stage recommendation systems, SNA-based influencer detection, and cross-sell/up-sell models, along with client enablement and business insight delivery.
+
+Education:
+
+UVCE, Bangalore, Master of Engineering
+My specialization was in Computer Science, with an overall aggregate of 77%. Got scholarship from MHRD
+SVCE, Bangalore, Bachelor of Engineering
+My specialization was in Information Science, with an overall aggregate of 55%. Cleared Graduate Aptitude Test in Engineering with 96 percentile.
+
+Publication:
+Application of Genetic Algorithm and Machine Learning Techniques for stock market prediction -International journal of computer Trends and technology volume 36 number 1
