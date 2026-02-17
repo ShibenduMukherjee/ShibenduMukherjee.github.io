@@ -7,17 +7,19 @@
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         tailwind.config = {
-            darkMode: "class",
             theme: {
                 extend: {
                     colors: {
-                        "primary": "#0d46f2",
-                        "background-light": "#f5f6f8",
-                        "background-dark": "#0a0c14",
-                        "surface-dark": "#161b2a",
-                        "border-dark": "#282c39",
+                        "primary": "#0f766e", // Teal 700
+                        "primary-dark": "#115e59", // Teal 800
+                        "background": "#f8fafc", // Slate 50
+                        "surface": "#ffffff", // White
+                        "text-main": "#1e293b", // Slate 800
+                        "text-muted": "#64748b", // Slate 500
+                        "border-light": "#e2e8f0", // Slate 200
                     },
                     fontFamily: {
                         "display": ["Inter", "sans-serif"]
@@ -38,17 +40,18 @@
             scroll-behavior: smooth;
         }
         .bg-grid-pattern {
-            background-image: radial-gradient(circle, #0d46f2 1px, transparent 1px);
+            background-image: radial-gradient(circle, #0f766e 1px, transparent 1px);
             background-size: 30px 30px;
             opacity: 0.05;
         }
         .timeline-gradient {
-            background: linear-gradient(to bottom, #0d46f2 0%, transparent 100%);
+            background: linear-gradient(to bottom, #0f766e 0%, transparent 100%);
         }
         .glass-card {
-            background: rgba(22, 27, 42, 0.7);
+            background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(40, 44, 57, 0.8);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
         }
         /* Tab transitions */
         .tab-content {
@@ -64,24 +67,24 @@
         }
     </style>
 </head>
-<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 selection:bg-primary selection:text-white">
+<body class="bg-background text-text-main selection:bg-primary selection:text-white">
 <!-- Grid Background Overlay -->
 <div class="fixed inset-0 bg-grid-pattern pointer-events-none z-0"></div>
 <div class="relative z-10 flex flex-col min-h-screen">
     <!-- Top Navigation -->
-    <header class="sticky top-0 z-50 w-full border-b border-border-dark bg-background-dark/80 backdrop-blur-md">
+    <header class="sticky top-0 z-50 w-full border-b border-border-light bg-surface/90 backdrop-blur-md shadow-sm">
         <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <div class="bg-primary p-1.5 rounded-lg">
+                <div class="bg-primary p-1.5 rounded-lg shadow-md">
                     <span class="material-symbols-outlined text-white text-xl">insights</span>
                 </div>
-                <span class="hidden md:block text-lg font-bold tracking-tight text-white">Shibendu <span class="text-primary">Mukherjee</span></span>
+                <span class="hidden md:block text-lg font-bold tracking-tight text-text-main">Shibendu <span class="text-primary">Mukherjee</span></span>
             </div>
             <nav class="flex items-center gap-3 md:gap-8 overflow-x-auto pb-2 md:pb-0">
-                <button onclick="switchTab('resume')" id="nav-resume" class="text-xs md:text-sm font-medium text-primary transition-colors hover:text-primary/80 whitespace-nowrap">Resume</button>
-                <button onclick="switchTab('projects')" id="nav-projects" class="text-xs md:text-sm font-medium text-slate-300 hover:text-primary transition-colors whitespace-nowrap">Projects</button>
-                <button onclick="switchTab('simulations')" id="nav-simulations" class="text-xs md:text-sm font-medium text-slate-300 hover:text-primary transition-colors whitespace-nowrap">Simulations</button>
-                <button onclick="scrollToContact()" class="bg-primary hover:bg-primary/90 text-white px-3 py-1.5 md:px-5 md:py-2 rounded-lg text-xs md:text-sm font-bold transition-all transform hover:scale-105 whitespace-nowrap">
+                <button onclick="switchTab('resume')" id="nav-resume" class="text-xs md:text-sm font-medium text-primary transition-colors hover:text-primary-dark whitespace-nowrap">Resume</button>
+                <button onclick="switchTab('projects')" id="nav-projects" class="text-xs md:text-sm font-medium text-text-muted hover:text-primary transition-colors whitespace-nowrap">Projects</button>
+                <button onclick="switchTab('simulations')" id="nav-simulations" class="text-xs md:text-sm font-medium text-text-muted hover:text-primary transition-colors whitespace-nowrap">Simulations</button>
+                <button onclick="scrollToContact()" class="bg-primary hover:bg-primary-dark text-white px-3 py-1.5 md:px-5 md:py-2 rounded-lg text-xs md:text-sm font-bold transition-all transform hover:scale-105 whitespace-nowrap shadow-md hover:shadow-lg">
                     Contact Me
                 </button>
             </nav>
@@ -95,34 +98,34 @@
             <section class="relative pt-20 pb-16 px-6 overflow-hidden">
                 <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
                     <div class="space-y-8">
-                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-wider">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-wider shadow-sm">
                             <span class="relative flex h-2 w-2">
                                 <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                                 <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
                             </span>
                             Available for Consulting
                         </div>
-                        <h1 class="text-5xl lg:text-7xl font-black tracking-tighter leading-[1.1] text-white">
+                        <h1 class="text-5xl lg:text-7xl font-black tracking-tighter leading-[1.1] text-text-main">
                             Lead Data Scientist & <span class="text-primary">ML Consultant</span>
                         </h1>
-                        <p class="text-lg text-slate-400 max-w-xl leading-relaxed">
+                        <p class="text-lg text-text-muted max-w-xl leading-relaxed">
                             Transforming complex datasets into strategic assets through advanced engineering, NLP, and predictive modeling. 10+ years of high-impact delivery.
                         </p>
                         <div class="flex flex-wrap gap-4">
-                            <button onclick="switchTab('projects')" class="bg-primary text-white px-8 py-4 rounded-xl font-bold flex items-center gap-2 hover:shadow-[0_0_20px_rgba(13,70,242,0.4)] transition-all">
+                            <button onclick="switchTab('projects')" class="bg-primary text-white px-8 py-4 rounded-xl font-bold flex items-center gap-2 hover:shadow-[0_0_20px_rgba(15,118,110,0.3)] hover:bg-primary-dark transition-all shadow-lg">
                                 View Projects <span class="material-symbols-outlined text-sm">arrow_forward</span>
                             </button>
-                            <button class="glass-card text-white px-8 py-4 rounded-xl font-bold hover:bg-white/5 transition-all">
+                            <button class="glass-card text-text-main px-8 py-4 rounded-xl font-bold hover:bg-white/50 transition-all border border-border-light hover:shadow-md">
                                 Download CV
                             </button>
                         </div>
                     </div>
                     <div class="relative lg:block hidden">
-                        <div class="relative z-10 glass-card p-2 rounded-2xl overflow-hidden shadow-2xl">
-                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKhBnPULfzIKdBl2QdIbBFLXbylRHe2ujyG1AXr3XA7kTAkeWTTuurrvr3ytUe2fHIzePAvXa0rGeIWALPssROhNKrNGsSsF0H-DlxY_VWjf3NjL63qtSXe_QhZux7hqx4QZz2QhjCJXeBPJPsu7zNGlvLVIW0ScCSRPcgg_Aj2E2HlVPN2HjF42bZTgNQ08aCUpGG2OAr5NNj0rSHbnsKF75T2rM5RqWxAYXZP9-fr7bJE0rOjDzJdYXhAWoRBqd0ClXLA-2-IDk" alt="Data Visualization Dashboard" class="rounded-xl opacity-80" data-alt="Abstract dark data visualization dashboard with graphs"/>
+                        <div class="relative z-10 glass-card p-6 rounded-2xl overflow-hidden shadow-2xl flex items-center justify-center">
+                            <canvas id="skillsChart" class="w-full max-w-md"></canvas>
                         </div>
-                        <div class="absolute -top-10 -right-10 w-64 h-64 bg-primary/20 rounded-full blur-[100px] -z-10"></div>
-                        <div class="absolute -bottom-10 -left-10 w-64 h-64 bg-primary/10 rounded-full blur-[100px] -z-10"></div>
+                        <div class="absolute -top-10 -right-10 w-64 h-64 bg-primary/10 rounded-full blur-[100px] -z-10"></div>
+                        <div class="absolute -bottom-10 -left-10 w-64 h-64 bg-teal-200/20 rounded-full blur-[100px] -z-10"></div>
                     </div>
                 </div>
             </section>
@@ -130,30 +133,30 @@
             <!-- Stats Bar -->
             <section class="px-6 py-12">
                 <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">
-                    <div class="glass-card p-8 rounded-2xl border-l-4 border-primary">
-                        <span class="block text-4xl font-black text-white mb-1">10+</span>
-                        <span class="text-sm font-medium text-slate-400 uppercase tracking-widest">Years Experience</span>
+                    <div class="glass-card p-8 rounded-2xl border-l-4 border-primary hover:shadow-lg transition-all">
+                        <span class="block text-4xl font-black text-primary mb-1">10+</span>
+                        <span class="text-sm font-bold text-text-muted uppercase tracking-widest">Years Experience</span>
                     </div>
-                    <div class="glass-card p-8 rounded-2xl border-l-4 border-primary">
-                        <span class="block text-4xl font-black text-white mb-1">50+</span>
-                        <span class="text-sm font-medium text-slate-400 uppercase tracking-widest">ML Models</span>
+                    <div class="glass-card p-8 rounded-2xl border-l-4 border-primary hover:shadow-lg transition-all">
+                        <span class="block text-4xl font-black text-primary mb-1">50+</span>
+                        <span class="text-sm font-bold text-text-muted uppercase tracking-widest">ML Models</span>
                     </div>
-                    <div class="glass-card p-8 rounded-2xl border-l-4 border-primary">
-                        <span class="block text-4xl font-black text-white mb-1">4</span>
-                        <span class="text-sm font-medium text-slate-400 uppercase tracking-widest">Major Roles</span>
+                    <div class="glass-card p-8 rounded-2xl border-l-4 border-primary hover:shadow-lg transition-all">
+                        <span class="block text-4xl font-black text-primary mb-1">4</span>
+                        <span class="text-sm font-bold text-text-muted uppercase tracking-widest">Major Roles</span>
                     </div>
-                    <div class="glass-card p-8 rounded-2xl border-l-4 border-primary">
-                        <span class="block text-2xl font-black text-white mb-1 leading-tight">MHRD</span>
-                        <span class="text-sm font-medium text-slate-400 uppercase tracking-widest">Scholar</span>
+                    <div class="glass-card p-8 rounded-2xl border-l-4 border-primary hover:shadow-lg transition-all">
+                        <span class="block text-2xl font-black text-primary mb-1 leading-tight">MHRD</span>
+                        <span class="text-sm font-bold text-text-muted uppercase tracking-widest">Scholar</span>
                     </div>
                 </div>
             </section>
 
             <!-- Summary Section -->
-            <section id="summary" class="px-6 py-20 bg-primary/[0.02]">
+            <section id="summary" class="px-6 py-20 bg-primary/5">
                 <div class="max-w-4xl mx-auto text-center">
-                    <h2 class="text-3xl font-bold mb-8 text-white">Professional Summary</h2>
-                    <p class="text-xl leading-relaxed text-slate-300">
+                    <h2 class="text-3xl font-bold mb-8 text-text-main">Professional Summary</h2>
+                    <p class="text-xl leading-relaxed text-text-muted">
                         10+ years of experience working across Analytics & Machine Learning domain. Proficient in machine learning and data mining techniques like Feature Engineering, Classification, Regression, Clustering, and NLP. I understand and translate statistics and analytics to address business problems, structure solutions to meet client needs, and have hands-on experience in Python, SQL, R, SAS Enterprise Miner, Weka, and Excel.
                     </p>
                 </div>
@@ -163,8 +166,8 @@
             <section id="experience" class="px-6 py-24">
                 <div class="max-w-5xl mx-auto">
                     <div class="flex items-center gap-4 mb-16">
-                        <h2 class="text-4xl font-black text-white">Work Experience</h2>
-                        <div class="h-px flex-grow bg-border-dark"></div>
+                        <h2 class="text-4xl font-black text-text-main">Work Experience</h2>
+                        <div class="h-px flex-grow bg-border-light"></div>
                     </div>
                     <div class="relative space-y-12">
                         <!-- Timeline Line -->
@@ -173,14 +176,14 @@
                         <!-- Item 1: Latent View -->
                         <div class="relative flex flex-col md:flex-row items-center justify-between w-full">
                             <div class="md:w-[45%] mb-8 md:mb-0">
-                                <div class="glass-card p-6 rounded-2xl hover:border-primary/50 transition-all group">
+                                <div class="glass-card p-6 rounded-2xl hover:border-primary/50 transition-all group hover:shadow-lg">
                                     <div class="flex items-center justify-between mb-4">
-                                        <span class="px-3 py-1 bg-primary/20 text-primary text-xs font-bold rounded">Dec 2022 - Present</span>
+                                        <span class="px-3 py-1 bg-primary/10 text-primary-dark text-xs font-bold rounded border border-primary/20">Dec 2022 - Present</span>
                                         <span class="material-symbols-outlined text-primary group-hover:rotate-12 transition-transform">cloud_done</span>
                                     </div>
-                                    <h3 class="text-xl font-bold text-white mb-1">Consultant</h3>
+                                    <h3 class="text-xl font-bold text-text-main mb-1">Consultant</h3>
                                     <p class="text-primary font-semibold mb-4">LatentView Analytics</p>
-                                    <ul class="text-slate-400 text-sm space-y-2">
+                                    <ul class="text-text-muted text-sm space-y-2">
                                         <li>• Led cross-domain problem understanding across 8 business areas.</li>
                                         <li>• Delivered 'Next Best Action' models for credit cards.</li>
                                         <li>• Built DE pipelines in Azure Data Factory and Databricks.</li>
@@ -188,23 +191,23 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="absolute left-0 md:left-1/2 w-4 h-4 bg-primary rounded-full -translate-x-1/2 shadow-[0_0_15px_rgba(13,70,242,0.8)] z-20"></div>
+                            <div class="absolute left-0 md:left-1/2 w-4 h-4 bg-primary rounded-full -translate-x-1/2 shadow-[0_0_15px_rgba(15,118,110,0.5)] z-20"></div>
                             <div class="md:w-[45%] pl-8 md:pl-0">
-                                <span class="text-slate-500 font-bold uppercase tracking-widest text-xs">LatentView Analytics</span>
+                                <span class="text-text-muted font-bold uppercase tracking-widest text-xs">LatentView Analytics</span>
                             </div>
                         </div>
 
                         <!-- Item 2: Wipro -->
                         <div class="relative flex flex-col md:flex-row-reverse items-center justify-between w-full">
                             <div class="md:w-[45%] mb-8 md:mb-0">
-                                <div class="glass-card p-6 rounded-2xl hover:border-primary/50 transition-all group">
+                                <div class="glass-card p-6 rounded-2xl hover:border-primary/50 transition-all group hover:shadow-lg">
                                     <div class="flex items-center justify-between mb-4">
-                                        <span class="px-3 py-1 bg-primary/20 text-primary text-xs font-bold rounded">Jun 2019 - Dec 2022</span>
+                                        <span class="px-3 py-1 bg-primary/10 text-primary-dark text-xs font-bold rounded border border-primary/20">Jun 2019 - Dec 2022</span>
                                         <span class="material-symbols-outlined text-primary group-hover:rotate-12 transition-transform">psychology</span>
                                     </div>
-                                    <h3 class="text-xl font-bold text-white mb-1">Associate Consultant</h3>
+                                    <h3 class="text-xl font-bold text-text-main mb-1">Associate Consultant</h3>
                                     <p class="text-primary font-semibold mb-4">Wipro Limited</p>
-                                    <ul class="text-slate-400 text-sm space-y-2">
+                                    <ul class="text-text-muted text-sm space-y-2">
                                         <li>• Product designing and implementation for fast prototyping of ML use cases.</li>
                                         <li>• NLP optimization for service ticket resolution.</li>
                                         <li>• Created ML-based app for 'human in the loop' activities.</li>
@@ -212,54 +215,54 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="absolute left-0 md:left-1/2 w-4 h-4 bg-primary rounded-full -translate-x-1/2 shadow-[0_0_15px_rgba(13,70,242,0.8)] z-20"></div>
+                            <div class="absolute left-0 md:left-1/2 w-4 h-4 bg-primary rounded-full -translate-x-1/2 shadow-[0_0_15px_rgba(15,118,110,0.5)] z-20"></div>
                             <div class="md:w-[45%] pr-8 md:pr-0 text-left md:text-right">
-                                <span class="text-slate-500 font-bold uppercase tracking-widest text-xs">Wipro Technologies</span>
+                                <span class="text-text-muted font-bold uppercase tracking-widest text-xs">Wipro Technologies</span>
                             </div>
                         </div>
 
                         <!-- Item 3: Tredence -->
                         <div class="relative flex flex-col md:flex-row items-center justify-between w-full">
                             <div class="md:w-[45%] mb-8 md:mb-0">
-                                <div class="glass-card p-6 rounded-2xl hover:border-primary/50 transition-all group">
+                                <div class="glass-card p-6 rounded-2xl hover:border-primary/50 transition-all group hover:shadow-lg">
                                     <div class="flex items-center justify-between mb-4">
-                                        <span class="px-3 py-1 bg-primary/20 text-primary text-xs font-bold rounded">Dec 2017 - Jun 2019</span>
+                                        <span class="px-3 py-1 bg-primary/10 text-primary-dark text-xs font-bold rounded border border-primary/20">Dec 2017 - Jun 2019</span>
                                         <span class="material-symbols-outlined text-primary group-hover:rotate-12 transition-transform">shopping_cart</span>
                                     </div>
-                                    <h3 class="text-xl font-bold text-white mb-1">Senior Business Analyst</h3>
+                                    <h3 class="text-xl font-bold text-text-main mb-1">Senior Business Analyst</h3>
                                     <p class="text-primary font-semibold mb-4">Tredence Analytics</p>
-                                    <ul class="text-slate-400 text-sm space-y-2">
+                                    <ul class="text-text-muted text-sm space-y-2">
                                         <li>• Supported acquisition and retention decisions for a leading US retailer.</li>
                                         <li>• Campaign sensitivity analysis and merchandising insights.</li>
                                         <li>• Forecasting at store level using Arima, Arimax, and BSTS.</li>
                                     </ul>
                                 </div>
                             </div>
-                            <div class="absolute left-0 md:left-1/2 w-4 h-4 bg-primary rounded-full -translate-x-1/2 shadow-[0_0_15px_rgba(13,70,242,0.8)] z-20"></div>
+                            <div class="absolute left-0 md:left-1/2 w-4 h-4 bg-primary rounded-full -translate-x-1/2 shadow-[0_0_15px_rgba(15,118,110,0.5)] z-20"></div>
                             <div class="md:w-[45%] pl-8 md:pl-0">
-                                <span class="text-slate-500 font-bold uppercase tracking-widest text-xs">Tredence Inc.</span>
+                                <span class="text-text-muted font-bold uppercase tracking-widest text-xs">Tredence Inc.</span>
                             </div>
                         </div>
 
                         <!-- Item 4: ABIBA -->
                         <div class="relative flex flex-col md:flex-row-reverse items-center justify-between w-full">
                             <div class="md:w-[45%] mb-8 md:mb-0">
-                                <div class="glass-card p-6 rounded-2xl hover:border-primary/50 transition-all group">
+                                <div class="glass-card p-6 rounded-2xl hover:border-primary/50 transition-all group hover:shadow-lg">
                                     <div class="flex items-center justify-between mb-4">
-                                        <span class="px-3 py-1 bg-primary/20 text-primary text-xs font-bold rounded">Aug 2015 - Dec 2017</span>
+                                        <span class="px-3 py-1 bg-primary/10 text-primary-dark text-xs font-bold rounded border border-primary/20">Aug 2015 - Dec 2017</span>
                                         <span class="material-symbols-outlined text-primary group-hover:rotate-12 transition-transform">cell_tower</span>
                                     </div>
-                                    <h3 class="text-xl font-bold text-white mb-1">Data Analyst</h3>
+                                    <h3 class="text-xl font-bold text-text-main mb-1">Data Analyst</h3>
                                     <p class="text-primary font-semibold mb-4">ABIBA Systems</p>
-                                    <ul class="text-slate-400 text-sm space-y-2">
+                                    <ul class="text-text-muted text-sm space-y-2">
                                         <li>• Built ML-driven telecom solutions covering customer segmentation.</li>
                                         <li>• SNA-based influencer detection and cross-sell/up-sell models.</li>
                                     </ul>
                                 </div>
                             </div>
-                            <div class="absolute left-0 md:left-1/2 w-4 h-4 bg-primary rounded-full -translate-x-1/2 shadow-[0_0_15px_rgba(13,70,242,0.8)] z-20"></div>
+                            <div class="absolute left-0 md:left-1/2 w-4 h-4 bg-primary rounded-full -translate-x-1/2 shadow-[0_0_15px_rgba(15,118,110,0.5)] z-20"></div>
                             <div class="md:w-[45%] pr-8 md:pr-0 text-left md:text-right">
-                                <span class="text-slate-500 font-bold uppercase tracking-widest text-xs">ABIBA Systems</span>
+                                <span class="text-text-muted font-bold uppercase tracking-widest text-xs">ABIBA Systems</span>
                             </div>
                         </div>
                     </div>
@@ -267,65 +270,65 @@
             </section>
 
             <!-- Skills Grid -->
-            <section id="skills" class="px-6 py-24 bg-surface-dark/30">
+            <section id="skills" class="px-6 py-24 bg-surface/50">
                 <div class="max-w-7xl mx-auto">
                     <div class="text-center mb-16">
-                        <h2 class="text-4xl font-black text-white mb-4">Technical Arsenal</h2>
-                        <p class="text-slate-400">Core competencies in modern data science and engineering stacks.</p>
+                        <h2 class="text-4xl font-black text-text-main mb-4">Technical Arsenal</h2>
+                        <p class="text-text-muted">Core competencies in modern data science and engineering stacks.</p>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                         <!-- Langs -->
-                        <div class="glass-card p-8 rounded-2xl border-t-2 border-primary">
+                        <div class="glass-card p-8 rounded-2xl border-t-2 border-primary hover:shadow-lg transition-all">
                             <div class="flex items-center gap-3 mb-6">
                                 <span class="material-symbols-outlined text-primary">terminal</span>
-                                <h4 class="font-bold text-white">Languages & Tools</h4>
+                                <h4 class="font-bold text-text-main">Languages & Tools</h4>
                             </div>
                             <div class="flex flex-wrap gap-2">
-                                <span class="bg-white/5 px-3 py-1 rounded-full text-xs font-medium text-slate-300">Python</span>
-                                <span class="bg-white/5 px-3 py-1 rounded-full text-xs font-medium text-slate-300">R</span>
-                                <span class="bg-white/5 px-3 py-1 rounded-full text-xs font-medium text-slate-300">SQL</span>
-                                <span class="bg-white/5 px-3 py-1 rounded-full text-xs font-medium text-slate-300">SAS EM</span>
-                                <span class="bg-white/5 px-3 py-1 rounded-full text-xs font-medium text-slate-300">Weka</span>
-                                <span class="bg-white/5 px-3 py-1 rounded-full text-xs font-medium text-slate-300">Excel</span>
+                                <span class="bg-primary/5 px-3 py-1 rounded-full text-xs font-bold text-text-muted border border-primary/10">Python</span>
+                                <span class="bg-primary/5 px-3 py-1 rounded-full text-xs font-bold text-text-muted border border-primary/10">R</span>
+                                <span class="bg-primary/5 px-3 py-1 rounded-full text-xs font-bold text-text-muted border border-primary/10">SQL</span>
+                                <span class="bg-primary/5 px-3 py-1 rounded-full text-xs font-bold text-text-muted border border-primary/10">SAS EM</span>
+                                <span class="bg-primary/5 px-3 py-1 rounded-full text-xs font-bold text-text-muted border border-primary/10">Weka</span>
+                                <span class="bg-primary/5 px-3 py-1 rounded-full text-xs font-bold text-text-muted border border-primary/10">Excel</span>
                             </div>
                         </div>
                         <!-- Cloud -->
-                        <div class="glass-card p-8 rounded-2xl border-t-2 border-primary">
+                        <div class="glass-card p-8 rounded-2xl border-t-2 border-primary hover:shadow-lg transition-all">
                             <div class="flex items-center gap-3 mb-6">
                                 <span class="material-symbols-outlined text-primary">cloud</span>
-                                <h4 class="font-bold text-white">Cloud & Engineering</h4>
+                                <h4 class="font-bold text-text-main">Cloud & Engineering</h4>
                             </div>
                             <div class="flex flex-wrap gap-2">
-                                <span class="bg-white/5 px-3 py-1 rounded-full text-xs font-medium text-slate-300">Azure Data Factory</span>
-                                <span class="bg-white/5 px-3 py-1 rounded-full text-xs font-medium text-slate-300">Databricks</span>
+                                <span class="bg-primary/5 px-3 py-1 rounded-full text-xs font-bold text-text-muted border border-primary/10">Azure Data Factory</span>
+                                <span class="bg-primary/5 px-3 py-1 rounded-full text-xs font-bold text-text-muted border border-primary/10">Databricks</span>
                             </div>
                         </div>
                         <!-- Big Data -->
-                        <div class="glass-card p-8 rounded-2xl border-t-2 border-primary">
+                        <div class="glass-card p-8 rounded-2xl border-t-2 border-primary hover:shadow-lg transition-all">
                             <div class="flex items-center gap-3 mb-6">
                                 <span class="material-symbols-outlined text-primary">database</span>
-                                <h4 class="font-bold text-white">Databases</h4>
+                                <h4 class="font-bold text-text-main">Databases</h4>
                             </div>
                             <div class="flex flex-wrap gap-2">
-                                <span class="bg-white/5 px-3 py-1 rounded-full text-xs font-medium text-slate-300">Hive</span>
-                                <span class="bg-white/5 px-3 py-1 rounded-full text-xs font-medium text-slate-300">Teradata</span>
-                                <span class="bg-white/5 px-3 py-1 rounded-full text-xs font-medium text-slate-300">Oracle</span>
-                                <span class="bg-white/5 px-3 py-1 rounded-full text-xs font-medium text-slate-300">Vertica</span>
-                                <span class="bg-white/5 px-3 py-1 rounded-full text-xs font-medium text-slate-300">MySQL</span>
-                                <span class="bg-white/5 px-3 py-1 rounded-full text-xs font-medium text-slate-300">Postgres</span>
+                                <span class="bg-primary/5 px-3 py-1 rounded-full text-xs font-bold text-text-muted border border-primary/10">Hive</span>
+                                <span class="bg-primary/5 px-3 py-1 rounded-full text-xs font-bold text-text-muted border border-primary/10">Teradata</span>
+                                <span class="bg-primary/5 px-3 py-1 rounded-full text-xs font-bold text-text-muted border border-primary/10">Oracle</span>
+                                <span class="bg-primary/5 px-3 py-1 rounded-full text-xs font-bold text-text-muted border border-primary/10">Vertica</span>
+                                <span class="bg-primary/5 px-3 py-1 rounded-full text-xs font-bold text-text-muted border border-primary/10">MySQL</span>
+                                <span class="bg-primary/5 px-3 py-1 rounded-full text-xs font-bold text-text-muted border border-primary/10">Postgres</span>
                             </div>
                         </div>
                         <!-- Specialization -->
-                        <div class="glass-card p-8 rounded-2xl border-t-2 border-primary">
+                        <div class="glass-card p-8 rounded-2xl border-t-2 border-primary hover:shadow-lg transition-all">
                             <div class="flex items-center gap-3 mb-6">
                                 <span class="material-symbols-outlined text-primary">hub</span>
-                                <h4 class="font-bold text-white">Specializations</h4>
+                                <h4 class="font-bold text-text-main">Specializations</h4>
                             </div>
                             <div class="flex flex-wrap gap-2">
-                                <span class="bg-white/5 px-3 py-1 rounded-full text-xs font-medium text-slate-300">NLP</span>
-                                <span class="bg-white/5 px-3 py-1 rounded-full text-xs font-medium text-slate-300">Time Series</span>
-                                <span class="bg-white/5 px-3 py-1 rounded-full text-xs font-medium text-slate-300">Genetic Algorithms</span>
-                                <span class="bg-white/5 px-3 py-1 rounded-full text-xs font-medium text-slate-300">Survival Analysis</span>
+                                <span class="bg-primary/5 px-3 py-1 rounded-full text-xs font-bold text-text-muted border border-primary/10">NLP</span>
+                                <span class="bg-primary/5 px-3 py-1 rounded-full text-xs font-bold text-text-muted border border-primary/10">Time Series</span>
+                                <span class="bg-primary/5 px-3 py-1 rounded-full text-xs font-bold text-text-muted border border-primary/10">Genetic Algorithms</span>
+                                <span class="bg-primary/5 px-3 py-1 rounded-full text-xs font-bold text-text-muted border border-primary/10">Survival Analysis</span>
                             </div>
                         </div>
                     </div>
@@ -338,24 +341,24 @@
                     <!-- Education -->
                     <div>
                         <div class="flex items-center gap-4 mb-10">
-                            <h2 class="text-3xl font-bold text-white">Education</h2>
-                            <div class="h-px flex-grow bg-border-dark"></div>
+                            <h2 class="text-3xl font-bold text-text-main">Education</h2>
+                            <div class="h-px flex-grow bg-border-light"></div>
                         </div>
                         <div class="space-y-6">
-                            <div class="glass-card p-8 rounded-2xl relative overflow-hidden group">
-                                <h3 class="text-2xl font-bold text-white mb-2">Master of Engineering</h3>
+                            <div class="glass-card p-8 rounded-2xl relative overflow-hidden group hover:shadow-lg transition-all">
+                                <h3 class="text-2xl font-bold text-text-main mb-2">Master of Engineering</h3>
                                 <p class="text-primary font-medium mb-1">UVCE, Bangalore University</p>
-                                <p class="text-slate-400 text-sm mb-4">Computer Science (77% Aggregate)</p>
-                                <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-lg text-primary text-sm font-bold uppercase tracking-wide">
+                                <p class="text-text-muted text-sm mb-4">Computer Science (77% Aggregate)</p>
+                                <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-lg text-primary-dark text-sm font-bold uppercase tracking-wide">
                                     <span class="material-symbols-outlined text-sm">military_tech</span>
                                     MHRD Scholar
                                 </div>
                             </div>
-                             <div class="glass-card p-8 rounded-2xl relative overflow-hidden group">
-                                <h3 class="text-2xl font-bold text-white mb-2">Bachelor of Engineering</h3>
+                             <div class="glass-card p-8 rounded-2xl relative overflow-hidden group hover:shadow-lg transition-all">
+                                <h3 class="text-2xl font-bold text-text-main mb-2">Bachelor of Engineering</h3>
                                 <p class="text-primary font-medium mb-1">SVCE, Bangalore</p>
-                                <p class="text-slate-400 text-sm mb-4">Information Science (55% Aggregate)</p>
-                                <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-lg text-primary text-sm font-bold uppercase tracking-wide">
+                                <p class="text-text-muted text-sm mb-4">Information Science (55% Aggregate)</p>
+                                <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-lg text-primary-dark text-sm font-bold uppercase tracking-wide">
                                     <span class="material-symbols-outlined text-sm">school</span>
                                     GATE Qualified (96%ile)
                                 </div>
@@ -365,15 +368,15 @@
                     <!-- Publication -->
                     <div>
                         <div class="flex items-center gap-4 mb-10">
-                            <h2 class="text-3xl font-bold text-white">Publication</h2>
-                            <div class="h-px flex-grow bg-border-dark"></div>
+                            <h2 class="text-3xl font-bold text-text-main">Publication</h2>
+                            <div class="h-px flex-grow bg-border-light"></div>
                         </div>
-                        <div class="glass-card p-8 rounded-2xl border-l-4 border-primary hover:translate-x-2 transition-all">
+                        <div class="glass-card p-8 rounded-2xl border-l-4 border-primary hover:translate-x-2 transition-all hover:shadow-lg">
                             <span class="text-primary font-bold text-xs uppercase tracking-[0.2em] mb-4 block">Published Research</span>
-                            <h3 class="text-xl font-bold text-white leading-tight mb-4 group-hover:text-primary transition-colors">
+                            <h3 class="text-xl font-bold text-text-main leading-tight mb-4 group-hover:text-primary transition-colors">
                                 'Application of Genetic Algorithm and Machine Learning Techniques for stock market prediction'
                             </h3>
-                            <p class="text-slate-400 text-sm mb-6 leading-relaxed">
+                            <p class="text-text-muted text-sm mb-6 leading-relaxed">
                                 International journal of computer Trends and technology volume 36 number 1. Explored the synergy between evolutionary computing and traditional supervised learning.
                             </p>
                         </div>
@@ -386,114 +389,114 @@
         <div id="projects-tab" class="tab-content hidden px-6 py-20">
             <div class="max-w-7xl mx-auto">
                 <div class="text-center mb-16">
-                    <h2 class="text-4xl font-black text-white mb-4">Case Studies & Projects</h2>
-                    <p class="text-slate-400 max-w-2xl mx-auto">Deep dive into complex problems solved through Data Science, Machine Learning, and Engineering.</p>
+                    <h2 class="text-4xl font-black text-text-main mb-4">Case Studies & Projects</h2>
+                    <p class="text-text-muted max-w-2xl mx-auto">Deep dive into complex problems solved through Data Science, Machine Learning, and Engineering.</p>
                 </div>
 
                 <div class="grid gap-12">
                     <!-- Project 1 -->
-                    <div class="glass-card p-8 rounded-2xl border-t-4 border-primary">
+                    <div class="glass-card p-8 rounded-2xl border-t-4 border-primary hover:shadow-lg transition-all">
                         <div class="flex flex-col md:flex-row justify-between md:items-center mb-6 gap-4">
-                            <h3 class="text-2xl font-bold text-white">Next Best Action for Credit Card</h3>
-                            <span class="px-3 py-1 bg-primary/20 text-primary text-xs font-bold rounded uppercase">Latent View Analytics</span>
+                            <h3 class="text-2xl font-bold text-text-main">Next Best Action for Credit Card</h3>
+                            <span class="px-3 py-1 bg-primary/10 text-primary-dark text-xs font-bold rounded uppercase border border-primary/20">Latent View Analytics</span>
                         </div>
-                        <div class="space-y-6 text-slate-300">
+                        <div class="space-y-6 text-text-muted">
                             <div>
-                                <h4 class="text-primary font-bold mb-2">Problem Statement</h4>
+                                <h4 class="text-primary-dark font-bold mb-2">Problem Statement</h4>
                                 <p>The client needed to improve customer engagement and card usage by recommending the most relevant actions or offers to credit card holders.</p>
                             </div>
                             <div>
-                                <h4 class="text-primary font-bold mb-2">Solution</h4>
+                                <h4 class="text-primary-dark font-bold mb-2">Solution</h4>
                                 <p>Delivered a "Next Best Action" engine combining Machine Learning models with rule-based recommendations. This hybrid approach ensured that recommendations were both personalized based on user behavior and aligned with business rules and compliance.</p>
                             </div>
                         </div>
                     </div>
 
                     <!-- Project 2 -->
-                    <div class="glass-card p-8 rounded-2xl border-t-4 border-primary">
+                    <div class="glass-card p-8 rounded-2xl border-t-4 border-primary hover:shadow-lg transition-all">
                         <div class="flex flex-col md:flex-row justify-between md:items-center mb-6 gap-4">
-                            <h3 class="text-2xl font-bold text-white">Conversational Analytics & SQL Generation</h3>
-                            <span class="px-3 py-1 bg-primary/20 text-primary text-xs font-bold rounded uppercase">Latent View Analytics</span>
+                            <h3 class="text-2xl font-bold text-text-main">Conversational Analytics & SQL Generation</h3>
+                            <span class="px-3 py-1 bg-primary/10 text-primary-dark text-xs font-bold rounded uppercase border border-primary/20">Latent View Analytics</span>
                         </div>
-                        <div class="space-y-6 text-slate-300">
+                        <div class="space-y-6 text-text-muted">
                             <div>
-                                <h4 class="text-primary font-bold mb-2">Problem Statement</h4>
+                                <h4 class="text-primary-dark font-bold mb-2">Problem Statement</h4>
                                 <p>Executives needed instant insights from data without relying on technical teams to write complex SQL queries for every request.</p>
                             </div>
                             <div>
-                                <h4 class="text-primary font-bold mb-2">Solution</h4>
+                                <h4 class="text-primary-dark font-bold mb-2">Solution</h4>
                                 <p>Directed the development of a conversational analytics tool enabling natural-language queries. The system automated SQL generation, translating English questions into database queries to provide instant, executive-ready insights.</p>
                             </div>
                         </div>
                     </div>
 
                     <!-- Project 3 -->
-                    <div class="glass-card p-8 rounded-2xl border-t-4 border-primary">
+                    <div class="glass-card p-8 rounded-2xl border-t-4 border-primary hover:shadow-lg transition-all">
                         <div class="flex flex-col md:flex-row justify-between md:items-center mb-6 gap-4">
-                            <h3 class="text-2xl font-bold text-white">NLP Optimization for Service Tickets</h3>
-                            <span class="px-3 py-1 bg-primary/20 text-primary text-xs font-bold rounded uppercase">Wipro</span>
+                            <h3 class="text-2xl font-bold text-text-main">NLP Optimization for Service Tickets</h3>
+                            <span class="px-3 py-1 bg-primary/10 text-primary-dark text-xs font-bold rounded uppercase border border-primary/20">Wipro</span>
                         </div>
-                        <div class="space-y-6 text-slate-300">
+                        <div class="space-y-6 text-text-muted">
                             <div>
-                                <h4 class="text-primary font-bold mb-2">Problem Statement</h4>
+                                <h4 class="text-primary-dark font-bold mb-2">Problem Statement</h4>
                                 <p>Service ticket resolution was slow due to manual categorization and lack of context for support agents.</p>
                             </div>
                             <div>
-                                <h4 class="text-primary font-bold mb-2">Solution</h4>
+                                <h4 class="text-primary-dark font-bold mb-2">Solution</h4>
                                 <p>Used Natural Language Processing (NLP) to optimize service ticket resolution. Implemented auto-suggestion of points in comments to help executives get a complete overview of the situation and rate comments effectively.</p>
                             </div>
                         </div>
                     </div>
 
                     <!-- Project 4 -->
-                    <div class="glass-card p-8 rounded-2xl border-t-4 border-primary">
+                    <div class="glass-card p-8 rounded-2xl border-t-4 border-primary hover:shadow-lg transition-all">
                         <div class="flex flex-col md:flex-row justify-between md:items-center mb-6 gap-4">
-                            <h3 class="text-2xl font-bold text-white">Human-in-the-Loop Automation App</h3>
-                            <span class="px-3 py-1 bg-primary/20 text-primary text-xs font-bold rounded uppercase">Wipro</span>
+                            <h3 class="text-2xl font-bold text-text-main">Human-in-the-Loop Automation App</h3>
+                            <span class="px-3 py-1 bg-primary/10 text-primary-dark text-xs font-bold rounded uppercase border border-primary/20">Wipro</span>
                         </div>
-                        <div class="space-y-6 text-slate-300">
+                        <div class="space-y-6 text-text-muted">
                             <div>
-                                <h4 class="text-primary font-bold mb-2">Problem Statement</h4>
+                                <h4 class="text-primary-dark font-bold mb-2">Problem Statement</h4>
                                 <p>Fully automated workflows often failed in edge cases, while manual processes were too slow.</p>
                             </div>
                             <div>
-                                <h4 class="text-primary font-bold mb-2">Solution</h4>
+                                <h4 class="text-primary-dark font-bold mb-2">Solution</h4>
                                 <p>Created a Machine Learning based app to handle 'human in the loop' activities within an automation workflow. This allowed the system to handle standard cases automatically while routing complex or low-confidence cases to humans for verification, improving overall accuracy and trust.</p>
                             </div>
                         </div>
                     </div>
 
                      <!-- Project 5 -->
-                    <div class="glass-card p-8 rounded-2xl border-t-4 border-primary">
+                    <div class="glass-card p-8 rounded-2xl border-t-4 border-primary hover:shadow-lg transition-all">
                         <div class="flex flex-col md:flex-row justify-between md:items-center mb-6 gap-4">
-                            <h3 class="text-2xl font-bold text-white">Retail Campaign Sensitivity & Forecasting</h3>
-                            <span class="px-3 py-1 bg-primary/20 text-primary text-xs font-bold rounded uppercase">Tredence</span>
+                            <h3 class="text-2xl font-bold text-text-main">Retail Campaign Sensitivity & Forecasting</h3>
+                            <span class="px-3 py-1 bg-primary/10 text-primary-dark text-xs font-bold rounded uppercase border border-primary/20">Tredence</span>
                         </div>
-                        <div class="space-y-6 text-slate-300">
+                        <div class="space-y-6 text-text-muted">
                             <div>
-                                <h4 class="text-primary font-bold mb-2">Problem Statement</h4>
+                                <h4 class="text-primary-dark font-bold mb-2">Problem Statement</h4>
                                 <p>A leading US retailer (80M+ customers) needed to optimize campaign effectiveness and store-level targets.</p>
                             </div>
                             <div>
-                                <h4 class="text-primary font-bold mb-2">Solution</h4>
+                                <h4 class="text-primary-dark font-bold mb-2">Solution</h4>
                                 <p>Conducted sensitivity analysis to measure campaign effectiveness. Implemented forecasting at both store and overall levels to set individual store targets using Arima, Arimax, and BSTS algorithms. Also helped allocate budgets based on store potential.</p>
                             </div>
                         </div>
                     </div>
 
                      <!-- Project 6 -->
-                    <div class="glass-card p-8 rounded-2xl border-t-4 border-primary">
+                    <div class="glass-card p-8 rounded-2xl border-t-4 border-primary hover:shadow-lg transition-all">
                         <div class="flex flex-col md:flex-row justify-between md:items-center mb-6 gap-4">
-                            <h3 class="text-2xl font-bold text-white">Telecom Churn & Recommendation Systems</h3>
-                            <span class="px-3 py-1 bg-primary/20 text-primary text-xs font-bold rounded uppercase">ABIBA Systems</span>
+                            <h3 class="text-2xl font-bold text-text-main">Telecom Churn & Recommendation Systems</h3>
+                            <span class="px-3 py-1 bg-primary/10 text-primary-dark text-xs font-bold rounded uppercase border border-primary/20">ABIBA Systems</span>
                         </div>
-                        <div class="space-y-6 text-slate-300">
+                        <div class="space-y-6 text-text-muted">
                             <div>
-                                <h4 class="text-primary font-bold mb-2">Problem Statement</h4>
+                                <h4 class="text-primary-dark font-bold mb-2">Problem Statement</h4>
                                 <p>Telecom providers faced high customer churn and needed better cross-sell opportunities.</p>
                             </div>
                             <div>
-                                <h4 class="text-primary font-bold mb-2">Solution</h4>
+                                <h4 class="text-primary-dark font-bold mb-2">Solution</h4>
                                 <p>Built ML-driven solutions covering customer segmentation and 2-stage recommendation systems. Utilized Social Network Analysis (SNA) for influencer detection to predict churn and drive cross-sell/up-sell strategies.</p>
                             </div>
                         </div>
@@ -507,119 +510,119 @@
         <div id="simulations-tab" class="tab-content hidden px-6 py-20">
             <div class="max-w-7xl mx-auto">
                 <div class="text-center mb-16">
-                    <h2 class="text-4xl font-black text-white mb-4">Interactive Simulations</h2>
-                    <p class="text-slate-400 max-w-2xl mx-auto">Experience the power of ML models firsthand with these interactive prototypes.</p>
+                    <h2 class="text-4xl font-black text-text-main mb-4">Interactive Simulations</h2>
+                    <p class="text-text-muted max-w-2xl mx-auto">Experience the power of ML models firsthand with these interactive prototypes.</p>
                 </div>
 
                 <div class="grid lg:grid-cols-3 gap-8">
                     <!-- Simulation 1: Next Best Action -->
-                    <div class="glass-card p-6 rounded-2xl border-t-4 border-primary h-full flex flex-col">
+                    <div class="glass-card p-6 rounded-2xl border-t-4 border-primary h-full flex flex-col hover:shadow-lg transition-all">
                         <div class="mb-6">
                             <div class="flex items-center gap-3 mb-2">
                                 <span class="material-symbols-outlined text-primary text-3xl">psychology_alt</span>
-                                <h3 class="text-xl font-bold text-white">Next Best Action</h3>
+                                <h3 class="text-xl font-bold text-text-main">Next Best Action</h3>
                             </div>
-                            <p class="text-slate-400 text-sm">Simulates a recommendation engine suggesting personalized offers based on customer profiles.</p>
+                            <p class="text-text-muted text-sm">Simulates a recommendation engine suggesting personalized offers based on customer profiles.</p>
                         </div>
 
-                        <div class="flex-grow space-y-4 bg-background-dark/50 p-4 rounded-xl border border-border-dark mb-4">
+                        <div class="flex-grow space-y-4 bg-background/50 p-4 rounded-xl border border-border-light mb-4 shadow-inner">
                             <!-- Input -->
                             <div>
-                                <label class="block text-xs font-bold text-slate-300 uppercase mb-2">Select Customer Profile</label>
-                                <select id="nba-profile" onchange="updateNBA()" class="w-full bg-surface-dark border border-border-dark rounded-lg px-3 py-2 text-white text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none">
+                                <label class="block text-xs font-bold text-text-muted uppercase mb-2">Select Customer Profile</label>
+                                <select id="nba-profile" onchange="updateNBA()" class="w-full bg-surface border border-border-light rounded-lg px-3 py-2 text-text-main text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none">
                                     <option value="high_spender">Alice (High Spender)</option>
                                     <option value="at_risk">Bob (At Risk)</option>
                                     <option value="new_user">Charlie (New User)</option>
                                 </select>
                             </div>
                             <!-- Output -->
-                            <div id="nba-result" class="border-t border-border-dark pt-4 mt-4">
-                                <div class="flex justify-between text-xs text-slate-500 mb-2">
-                                    <span>Profile: <span id="nba-name" class="text-white font-medium">Alice</span></span>
+                            <div id="nba-result" class="border-t border-border-light pt-4 mt-4">
+                                <div class="flex justify-between text-xs text-text-muted mb-2">
+                                    <span>Profile: <span id="nba-name" class="text-text-main font-medium">Alice</span></span>
                                     <span>Spend: <span id="nba-spend" class="text-primary font-medium">$2,500/mo</span></span>
                                 </div>
                                 <div class="bg-primary/10 border border-primary/20 rounded-lg p-3">
-                                    <span class="text-xs text-primary font-bold uppercase tracking-wider block mb-1">Recommended Action</span>
-                                    <p id="nba-recommendation" class="text-white font-medium text-sm">Offer: Premium Platinum Upgrade</p>
-                                    <p id="nba-reason" class="text-xs text-slate-400 mt-1">High monthly spend indicates potential for premium tier retention.</p>
+                                    <span class="text-xs text-primary-dark font-bold uppercase tracking-wider block mb-1">Recommended Action</span>
+                                    <p id="nba-recommendation" class="text-text-main font-medium text-sm">Offer: Premium Platinum Upgrade</p>
+                                    <p id="nba-reason" class="text-xs text-text-muted mt-1">High monthly spend indicates potential for premium tier retention.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Simulation 2: Churn Prediction -->
-                    <div class="glass-card p-6 rounded-2xl border-t-4 border-red-500 h-full flex flex-col">
+                    <div class="glass-card p-6 rounded-2xl border-t-4 border-red-500 h-full flex flex-col hover:shadow-lg transition-all">
                         <div class="mb-6">
                             <div class="flex items-center gap-3 mb-2">
                                 <span class="material-symbols-outlined text-red-500 text-3xl">warning</span>
-                                <h3 class="text-xl font-bold text-white">Churn Predictor</h3>
+                                <h3 class="text-xl font-bold text-text-main">Churn Predictor</h3>
                             </div>
-                            <p class="text-slate-400 text-sm">Predicts the likelihood of a customer leaving based on usage patterns.</p>
+                            <p class="text-text-muted text-sm">Predicts the likelihood of a customer leaving based on usage patterns.</p>
                         </div>
 
-                        <div class="flex-grow space-y-4 bg-background-dark/50 p-4 rounded-xl border border-border-dark mb-4">
+                        <div class="flex-grow space-y-4 bg-background/50 p-4 rounded-xl border border-border-light mb-4 shadow-inner">
                             <div>
                                 <div class="flex justify-between mb-1">
-                                    <label class="text-xs font-bold text-slate-300 uppercase">Monthly Bill ($)</label>
+                                    <label class="text-xs font-bold text-text-muted uppercase">Monthly Bill ($)</label>
                                     <span id="churn-bill-val" class="text-xs text-primary">100</span>
                                 </div>
-                                <input type="range" id="churn-bill" min="20" max="500" value="100" class="w-full h-2 bg-surface-dark rounded-lg appearance-none cursor-pointer accent-primary" oninput="document.getElementById('churn-bill-val').innerText = this.value">
+                                <input type="range" id="churn-bill" min="20" max="500" value="100" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-primary" oninput="document.getElementById('churn-bill-val').innerText = this.value">
                             </div>
                             <div>
                                 <div class="flex justify-between mb-1">
-                                    <label class="text-xs font-bold text-slate-300 uppercase">Tenure (Months)</label>
+                                    <label class="text-xs font-bold text-text-muted uppercase">Tenure (Months)</label>
                                     <span id="churn-tenure-val" class="text-xs text-primary">12</span>
                                 </div>
-                                <input type="range" id="churn-tenure" min="1" max="72" value="12" class="w-full h-2 bg-surface-dark rounded-lg appearance-none cursor-pointer accent-primary" oninput="document.getElementById('churn-tenure-val').innerText = this.value">
+                                <input type="range" id="churn-tenure" min="1" max="72" value="12" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-primary" oninput="document.getElementById('churn-tenure-val').innerText = this.value">
                             </div>
                             <div>
                                 <div class="flex justify-between mb-1">
-                                    <label class="text-xs font-bold text-slate-300 uppercase">Support Calls</label>
+                                    <label class="text-xs font-bold text-text-muted uppercase">Support Calls</label>
                                     <span id="churn-calls-val" class="text-xs text-primary">2</span>
                                 </div>
-                                <input type="number" id="churn-calls" min="0" max="20" value="2" class="w-full bg-surface-dark border border-border-dark rounded-lg px-3 py-1 text-white text-sm focus:border-primary outline-none" oninput="document.getElementById('churn-calls-val').innerText = this.value">
+                                <input type="number" id="churn-calls" min="0" max="20" value="2" class="w-full bg-surface border border-border-light rounded-lg px-3 py-1 text-text-main text-sm focus:border-primary outline-none" oninput="document.getElementById('churn-calls-val').innerText = this.value">
                             </div>
 
-                            <button onclick="predictChurn()" class="w-full bg-red-500/10 hover:bg-red-500/20 text-red-500 border border-red-500/50 py-2 rounded-lg text-sm font-bold transition-colors mt-2">
+                            <button onclick="predictChurn()" class="w-full bg-red-500/10 hover:bg-red-500/20 text-red-600 border border-red-500/50 py-2 rounded-lg text-sm font-bold transition-colors mt-2">
                                 Analyze Risk
                             </button>
 
-                            <div id="churn-result" class="hidden border-t border-border-dark pt-4 mt-2 text-center">
-                                <span class="text-xs text-slate-500 uppercase tracking-widest block mb-1">Churn Probability</span>
-                                <span id="churn-score" class="text-3xl font-black text-white">45%</span>
-                                <span id="churn-level" class="block text-xs font-bold text-yellow-500 mt-1">Medium Risk</span>
+                            <div id="churn-result" class="hidden border-t border-border-light pt-4 mt-2 text-center">
+                                <span class="text-xs text-text-muted uppercase tracking-widest block mb-1">Churn Probability</span>
+                                <span id="churn-score" class="text-3xl font-black text-text-main">45%</span>
+                                <span id="churn-level" class="block text-xs font-bold text-yellow-600 mt-1">Medium Risk</span>
                             </div>
                         </div>
                     </div>
 
                     <!-- Simulation 3: CLV Estimator -->
-                    <div class="glass-card p-6 rounded-2xl border-t-4 border-green-500 h-full flex flex-col">
+                    <div class="glass-card p-6 rounded-2xl border-t-4 border-green-500 h-full flex flex-col hover:shadow-lg transition-all">
                         <div class="mb-6">
                             <div class="flex items-center gap-3 mb-2">
                                 <span class="material-symbols-outlined text-green-500 text-3xl">monetization_on</span>
-                                <h3 class="text-xl font-bold text-white">CLV Estimator</h3>
+                                <h3 class="text-xl font-bold text-text-main">CLV Estimator</h3>
                             </div>
-                            <p class="text-slate-400 text-sm">Estimates Customer Lifetime Value over 3 years.</p>
+                            <p class="text-text-muted text-sm">Estimates Customer Lifetime Value over 3 years.</p>
                         </div>
 
-                        <div class="flex-grow space-y-4 bg-background-dark/50 p-4 rounded-xl border border-border-dark mb-4">
+                        <div class="flex-grow space-y-4 bg-background/50 p-4 rounded-xl border border-border-light mb-4 shadow-inner">
                             <div>
-                                <label class="block text-xs font-bold text-slate-300 uppercase mb-2">Avg Order Value ($)</label>
-                                <input type="number" id="clv-aov" value="50" class="w-full bg-surface-dark border border-border-dark rounded-lg px-3 py-2 text-white text-sm focus:border-green-500 outline-none">
+                                <label class="block text-xs font-bold text-text-muted uppercase mb-2">Avg Order Value ($)</label>
+                                <input type="number" id="clv-aov" value="50" class="w-full bg-surface border border-border-light rounded-lg px-3 py-2 text-text-main text-sm focus:border-green-500 outline-none">
                             </div>
                             <div>
-                                <label class="block text-xs font-bold text-slate-300 uppercase mb-2">Purchase Freq (per month)</label>
-                                <input type="number" id="clv-freq" value="2" class="w-full bg-surface-dark border border-border-dark rounded-lg px-3 py-2 text-white text-sm focus:border-green-500 outline-none">
+                                <label class="block text-xs font-bold text-text-muted uppercase mb-2">Purchase Freq (per month)</label>
+                                <input type="number" id="clv-freq" value="2" class="w-full bg-surface border border-border-light rounded-lg px-3 py-2 text-text-main text-sm focus:border-green-500 outline-none">
                             </div>
 
-                            <button onclick="calculateCLV()" class="w-full bg-green-500/10 hover:bg-green-500/20 text-green-500 border border-green-500/50 py-2 rounded-lg text-sm font-bold transition-colors mt-2">
+                            <button onclick="calculateCLV()" class="w-full bg-green-500/10 hover:bg-green-500/20 text-green-600 border border-green-500/50 py-2 rounded-lg text-sm font-bold transition-colors mt-2">
                                 Calculate CLV
                             </button>
 
-                            <div id="clv-result" class="hidden border-t border-border-dark pt-4 mt-2 text-center">
-                                <span class="text-xs text-slate-500 uppercase tracking-widest block mb-1">Est. 3-Year Value</span>
-                                <span id="clv-value" class="text-3xl font-black text-white">$3,600</span>
-                                <span id="clv-segment" class="block text-xs font-bold text-green-500 mt-1">Gold Segment</span>
+                            <div id="clv-result" class="hidden border-t border-border-light pt-4 mt-2 text-center">
+                                <span class="text-xs text-text-muted uppercase tracking-widest block mb-1">Est. 3-Year Value</span>
+                                <span id="clv-value" class="text-3xl font-black text-text-main">$3,600</span>
+                                <span id="clv-segment" class="block text-xs font-bold text-green-600 mt-1">Gold Segment</span>
                             </div>
                         </div>
                     </div>
@@ -629,17 +632,17 @@
     </main>
 
     <!-- Contact Section (Footer) -->
-    <footer id="contact" class="bg-background-dark border-t border-border-dark py-12 px-6">
+    <footer id="contact" class="bg-surface border-t border-border-light py-12 px-6">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
             <div>
                 <div class="flex items-center gap-3 mb-6">
                     <div class="bg-primary p-1.5 rounded-lg">
                         <span class="material-symbols-outlined text-white text-xl">insights</span>
                     </div>
-                    <span class="text-lg font-bold tracking-tight text-white">Shibendu <span class="text-primary">Mukherjee</span></span>
+                    <span class="hidden md:block text-lg font-bold tracking-tight text-text-main">Shibendu <span class="text-primary">Mukherjee</span></span>
                 </div>
-                <p class="text-slate-500 text-sm max-w-xs mb-6">Lead Data Scientist & ML Consultant available for consulting and full-time opportunities.</p>
-                <div class="flex flex-col gap-3 text-slate-400 text-sm">
+                <p class="text-text-muted text-sm max-w-xs mb-6">Lead Data Scientist & ML Consultant available for consulting and full-time opportunities.</p>
+                <div class="flex flex-col gap-3 text-text-muted text-sm">
                     <a href="mailto:email@example.com" class="flex items-center gap-2 hover:text-primary transition-colors">
                         <span class="material-symbols-outlined text-sm">mail</span> email@example.com
                     </a>
@@ -654,7 +657,7 @@
 
             <div class="flex gap-6 mt-4 md:mt-0">
                  <!-- LinkedIn Icon -->
-                <a class="text-slate-400 hover:text-primary transition-colors" href="https://linkedin.com/in/shibendu" target="_blank">
+                <a class="text-text-muted hover:text-primary transition-colors" href="https://linkedin.com/in/shibendu" target="_blank">
                     <svg class="size-6 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>
                 </a>
             </div>
@@ -687,6 +690,63 @@
     function scrollToContact() {
         document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
     }
+
+    // Skills Radar Chart
+    document.addEventListener('DOMContentLoaded', function() {
+        const ctx = document.getElementById('skillsChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: ['Machine Learning', 'NLP', 'Data Engineering', 'Statistical Analysis', 'Cloud (Azure/Databricks)', 'Visualization'],
+                datasets: [{
+                    label: 'Proficiency Level',
+                    data: [95, 85, 80, 90, 75, 85],
+                    backgroundColor: 'rgba(15, 118, 110, 0.2)', // Primary Teal with opacity
+                    borderColor: 'rgba(15, 118, 110, 1)', // Primary Teal
+                    pointBackgroundColor: 'rgba(15, 118, 110, 1)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgba(15, 118, 110, 1)'
+                }]
+            },
+            options: {
+                scales: {
+                    r: {
+                        angleLines: {
+                            color: 'rgba(0, 0, 0, 0.1)'
+                        },
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.1)'
+                        },
+                        pointLabels: {
+                            font: {
+                                size: 12,
+                                family: "'Inter', sans-serif",
+                                weight: '600'
+                            },
+                            color: '#1e293b' // text-main
+                        },
+                        ticks: {
+                            display: false,
+                            max: 100
+                        },
+                        suggestedMin: 0,
+                        suggestedMax: 100
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                elements: {
+                    line: {
+                        borderWidth: 3
+                    }
+                }
+            }
+        });
+    });
 
     // Simulation 1: Next Best Action
     function updateNBA() {
