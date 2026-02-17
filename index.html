@@ -75,12 +75,13 @@
                 <div class="bg-primary p-1.5 rounded-lg">
                     <span class="material-symbols-outlined text-white text-xl">insights</span>
                 </div>
-                <span class="text-lg font-bold tracking-tight text-white">Shibendu <span class="text-primary">Mukherjee</span></span>
+                <span class="hidden md:block text-lg font-bold tracking-tight text-white">Shibendu <span class="text-primary">Mukherjee</span></span>
             </div>
-            <nav class="hidden md:flex items-center gap-8">
-                <button onclick="switchTab('resume')" id="nav-resume" class="text-sm font-medium text-primary transition-colors hover:text-primary/80">Resume</button>
-                <button onclick="switchTab('projects')" id="nav-projects" class="text-sm font-medium text-slate-300 hover:text-primary transition-colors">Projects</button>
-                <button onclick="scrollToContact()" class="bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-lg text-sm font-bold transition-all transform hover:scale-105">
+            <nav class="flex items-center gap-3 md:gap-8 overflow-x-auto pb-2 md:pb-0">
+                <button onclick="switchTab('resume')" id="nav-resume" class="text-xs md:text-sm font-medium text-primary transition-colors hover:text-primary/80 whitespace-nowrap">Resume</button>
+                <button onclick="switchTab('projects')" id="nav-projects" class="text-xs md:text-sm font-medium text-slate-300 hover:text-primary transition-colors whitespace-nowrap">Projects</button>
+                <button onclick="switchTab('simulations')" id="nav-simulations" class="text-xs md:text-sm font-medium text-slate-300 hover:text-primary transition-colors whitespace-nowrap">Simulations</button>
+                <button onclick="scrollToContact()" class="bg-primary hover:bg-primary/90 text-white px-3 py-1.5 md:px-5 md:py-2 rounded-lg text-xs md:text-sm font-bold transition-all transform hover:scale-105 whitespace-nowrap">
                     Contact Me
                 </button>
             </nav>
@@ -501,6 +502,130 @@
                 </div>
             </div>
         </div>
+
+        <!-- Simulations Tab -->
+        <div id="simulations-tab" class="tab-content hidden px-6 py-20">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-black text-white mb-4">Interactive Simulations</h2>
+                    <p class="text-slate-400 max-w-2xl mx-auto">Experience the power of ML models firsthand with these interactive prototypes.</p>
+                </div>
+
+                <div class="grid lg:grid-cols-3 gap-8">
+                    <!-- Simulation 1: Next Best Action -->
+                    <div class="glass-card p-6 rounded-2xl border-t-4 border-primary h-full flex flex-col">
+                        <div class="mb-6">
+                            <div class="flex items-center gap-3 mb-2">
+                                <span class="material-symbols-outlined text-primary text-3xl">psychology_alt</span>
+                                <h3 class="text-xl font-bold text-white">Next Best Action</h3>
+                            </div>
+                            <p class="text-slate-400 text-sm">Simulates a recommendation engine suggesting personalized offers based on customer profiles.</p>
+                        </div>
+
+                        <div class="flex-grow space-y-4 bg-background-dark/50 p-4 rounded-xl border border-border-dark mb-4">
+                            <!-- Input -->
+                            <div>
+                                <label class="block text-xs font-bold text-slate-300 uppercase mb-2">Select Customer Profile</label>
+                                <select id="nba-profile" onchange="updateNBA()" class="w-full bg-surface-dark border border-border-dark rounded-lg px-3 py-2 text-white text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none">
+                                    <option value="high_spender">Alice (High Spender)</option>
+                                    <option value="at_risk">Bob (At Risk)</option>
+                                    <option value="new_user">Charlie (New User)</option>
+                                </select>
+                            </div>
+                            <!-- Output -->
+                            <div id="nba-result" class="border-t border-border-dark pt-4 mt-4">
+                                <div class="flex justify-between text-xs text-slate-500 mb-2">
+                                    <span>Profile: <span id="nba-name" class="text-white font-medium">Alice</span></span>
+                                    <span>Spend: <span id="nba-spend" class="text-primary font-medium">$2,500/mo</span></span>
+                                </div>
+                                <div class="bg-primary/10 border border-primary/20 rounded-lg p-3">
+                                    <span class="text-xs text-primary font-bold uppercase tracking-wider block mb-1">Recommended Action</span>
+                                    <p id="nba-recommendation" class="text-white font-medium text-sm">Offer: Premium Platinum Upgrade</p>
+                                    <p id="nba-reason" class="text-xs text-slate-400 mt-1">High monthly spend indicates potential for premium tier retention.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Simulation 2: Churn Prediction -->
+                    <div class="glass-card p-6 rounded-2xl border-t-4 border-red-500 h-full flex flex-col">
+                        <div class="mb-6">
+                            <div class="flex items-center gap-3 mb-2">
+                                <span class="material-symbols-outlined text-red-500 text-3xl">warning</span>
+                                <h3 class="text-xl font-bold text-white">Churn Predictor</h3>
+                            </div>
+                            <p class="text-slate-400 text-sm">Predicts the likelihood of a customer leaving based on usage patterns.</p>
+                        </div>
+
+                        <div class="flex-grow space-y-4 bg-background-dark/50 p-4 rounded-xl border border-border-dark mb-4">
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <label class="text-xs font-bold text-slate-300 uppercase">Monthly Bill ($)</label>
+                                    <span id="churn-bill-val" class="text-xs text-primary">100</span>
+                                </div>
+                                <input type="range" id="churn-bill" min="20" max="500" value="100" class="w-full h-2 bg-surface-dark rounded-lg appearance-none cursor-pointer accent-primary" oninput="document.getElementById('churn-bill-val').innerText = this.value">
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <label class="text-xs font-bold text-slate-300 uppercase">Tenure (Months)</label>
+                                    <span id="churn-tenure-val" class="text-xs text-primary">12</span>
+                                </div>
+                                <input type="range" id="churn-tenure" min="1" max="72" value="12" class="w-full h-2 bg-surface-dark rounded-lg appearance-none cursor-pointer accent-primary" oninput="document.getElementById('churn-tenure-val').innerText = this.value">
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <label class="text-xs font-bold text-slate-300 uppercase">Support Calls</label>
+                                    <span id="churn-calls-val" class="text-xs text-primary">2</span>
+                                </div>
+                                <input type="number" id="churn-calls" min="0" max="20" value="2" class="w-full bg-surface-dark border border-border-dark rounded-lg px-3 py-1 text-white text-sm focus:border-primary outline-none" oninput="document.getElementById('churn-calls-val').innerText = this.value">
+                            </div>
+
+                            <button onclick="predictChurn()" class="w-full bg-red-500/10 hover:bg-red-500/20 text-red-500 border border-red-500/50 py-2 rounded-lg text-sm font-bold transition-colors mt-2">
+                                Analyze Risk
+                            </button>
+
+                            <div id="churn-result" class="hidden border-t border-border-dark pt-4 mt-2 text-center">
+                                <span class="text-xs text-slate-500 uppercase tracking-widest block mb-1">Churn Probability</span>
+                                <span id="churn-score" class="text-3xl font-black text-white">45%</span>
+                                <span id="churn-level" class="block text-xs font-bold text-yellow-500 mt-1">Medium Risk</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Simulation 3: CLV Estimator -->
+                    <div class="glass-card p-6 rounded-2xl border-t-4 border-green-500 h-full flex flex-col">
+                        <div class="mb-6">
+                            <div class="flex items-center gap-3 mb-2">
+                                <span class="material-symbols-outlined text-green-500 text-3xl">monetization_on</span>
+                                <h3 class="text-xl font-bold text-white">CLV Estimator</h3>
+                            </div>
+                            <p class="text-slate-400 text-sm">Estimates Customer Lifetime Value over 3 years.</p>
+                        </div>
+
+                        <div class="flex-grow space-y-4 bg-background-dark/50 p-4 rounded-xl border border-border-dark mb-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-300 uppercase mb-2">Avg Order Value ($)</label>
+                                <input type="number" id="clv-aov" value="50" class="w-full bg-surface-dark border border-border-dark rounded-lg px-3 py-2 text-white text-sm focus:border-green-500 outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-300 uppercase mb-2">Purchase Freq (per month)</label>
+                                <input type="number" id="clv-freq" value="2" class="w-full bg-surface-dark border border-border-dark rounded-lg px-3 py-2 text-white text-sm focus:border-green-500 outline-none">
+                            </div>
+
+                            <button onclick="calculateCLV()" class="w-full bg-green-500/10 hover:bg-green-500/20 text-green-500 border border-green-500/50 py-2 rounded-lg text-sm font-bold transition-colors mt-2">
+                                Calculate CLV
+                            </button>
+
+                            <div id="clv-result" class="hidden border-t border-border-dark pt-4 mt-2 text-center">
+                                <span class="text-xs text-slate-500 uppercase tracking-widest block mb-1">Est. 3-Year Value</span>
+                                <span id="clv-value" class="text-3xl font-black text-white">$3,600</span>
+                                <span id="clv-segment" class="block text-xs font-bold text-green-500 mt-1">Gold Segment</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 
     <!-- Contact Section (Footer) -->
@@ -539,36 +664,123 @@
 
 <script>
     function switchTab(tabId) {
-        const resumeTab = document.getElementById('resume-tab');
-        const projectsTab = document.getElementById('projects-tab');
-        const navResume = document.getElementById('nav-resume');
-        const navProjects = document.getElementById('nav-projects');
+        const tabs = ['resume', 'projects', 'simulations'];
 
-        if (tabId === 'resume') {
-            resumeTab.classList.remove('hidden');
-            projectsTab.classList.add('hidden');
+        tabs.forEach(t => {
+            const tabEl = document.getElementById(t + '-tab');
+            const navEl = document.getElementById('nav-' + t);
 
-            navResume.classList.add('text-primary');
-            navResume.classList.remove('text-slate-300');
-
-            navProjects.classList.remove('text-primary');
-            navProjects.classList.add('text-slate-300');
-        } else {
-            resumeTab.classList.add('hidden');
-            projectsTab.classList.remove('hidden');
-
-            navProjects.classList.add('text-primary');
-            navProjects.classList.remove('text-slate-300');
-
-            navResume.classList.remove('text-primary');
-            navResume.classList.add('text-slate-300');
-        }
+            if (t === tabId) {
+                tabEl.classList.remove('hidden');
+                navEl.classList.add('text-primary');
+                navEl.classList.remove('text-slate-300');
+            } else {
+                tabEl.classList.add('hidden');
+                navEl.classList.remove('text-primary');
+                navEl.classList.add('text-slate-300');
+            }
+        });
 
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function scrollToContact() {
         document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Simulation 1: Next Best Action
+    function updateNBA() {
+        const profile = document.getElementById('nba-profile').value;
+        const nameEl = document.getElementById('nba-name');
+        const spendEl = document.getElementById('nba-spend');
+        const recEl = document.getElementById('nba-recommendation');
+        const reasonEl = document.getElementById('nba-reason');
+
+        const data = {
+            high_spender: {
+                name: "Alice",
+                spend: "$2,500/mo",
+                rec: "Offer: Premium Platinum Upgrade",
+                reason: "High monthly spend indicates potential for premium tier retention."
+            },
+            at_risk: {
+                name: "Bob",
+                spend: "$120/mo",
+                rec: "Offer: 20% Discount on Next Bill",
+                reason: "Usage has dropped by 40%. Immediate incentive required to prevent churn."
+            },
+            new_user: {
+                name: "Charlie",
+                spend: "$45/mo",
+                rec: "Offer: Free Onboarding Session",
+                reason: "New account activation. Education needed to drive feature adoption."
+            }
+        };
+
+        const selected = data[profile];
+        nameEl.innerText = selected.name;
+        spendEl.innerText = selected.spend;
+        recEl.innerText = selected.rec;
+        reasonEl.innerText = selected.reason;
+    }
+
+    // Simulation 2: Churn Prediction
+    function predictChurn() {
+        const bill = parseInt(document.getElementById('churn-bill').value);
+        const tenure = parseInt(document.getElementById('churn-tenure').value);
+        const calls = parseInt(document.getElementById('churn-calls').value);
+
+        // Simple heuristic formula for demo purposes
+        // Higher bill = +Risk, Higher tenure = -Risk, More calls = ++Risk
+        let riskScore = 30 + (bill * 0.1) - (tenure * 0.5) + (calls * 5);
+
+        // Clamp between 0 and 100
+        riskScore = Math.max(0, Math.min(99, riskScore));
+
+        const resultEl = document.getElementById('churn-result');
+        const scoreEl = document.getElementById('churn-score');
+        const levelEl = document.getElementById('churn-level');
+
+        resultEl.classList.remove('hidden');
+        scoreEl.innerText = Math.round(riskScore) + "%";
+
+        if (riskScore < 40) {
+            levelEl.innerText = "Low Risk";
+            levelEl.className = "block text-xs font-bold text-green-500 mt-1";
+        } else if (riskScore < 70) {
+            levelEl.innerText = "Medium Risk";
+            levelEl.className = "block text-xs font-bold text-yellow-500 mt-1";
+        } else {
+            levelEl.innerText = "Critical Risk";
+            levelEl.className = "block text-xs font-bold text-red-500 mt-1";
+        }
+    }
+
+    // Simulation 3: CLV Estimator
+    function calculateCLV() {
+        const aov = parseFloat(document.getElementById('clv-aov').value) || 0;
+        const freq = parseFloat(document.getElementById('clv-freq').value) || 0;
+
+        // Simple Formula: Monthly Value * 12 months * 3 years
+        const clv = aov * freq * 12 * 3;
+
+        const resultEl = document.getElementById('clv-result');
+        const valueEl = document.getElementById('clv-value');
+        const segmentEl = document.getElementById('clv-segment');
+
+        resultEl.classList.remove('hidden');
+        valueEl.innerText = "$" + clv.toLocaleString();
+
+        if (clv > 5000) {
+            segmentEl.innerText = "Diamond Segment";
+            segmentEl.className = "block text-xs font-bold text-primary mt-1";
+        } else if (clv > 2500) {
+            segmentEl.innerText = "Gold Segment";
+            segmentEl.className = "block text-xs font-bold text-green-500 mt-1";
+        } else {
+            segmentEl.innerText = "Silver Segment";
+            segmentEl.className = "block text-xs font-bold text-slate-400 mt-1";
+        }
     }
 </script>
 
